@@ -1,6 +1,8 @@
 # jnutterdev.com
 
-Personal portfolio and developer site for John Nutter — full stack developer. Built with Astro and Tina CMS, self-hosted with GitHub Actions CI/CD.
+Personal portfolio and developer site for John Nutter — full stack developer based in Decatur, GA. Built with Astro and Tina CMS, self-hosted with GitHub Actions CI/CD.
+
+The design uses a signage-inspired editorial aesthetic: muted sage green, large cream letterform, near-black type, and a wayfinding-style data grid in the hero. Reference mockup is in `mockup-sage/`.
 
 ---
 
@@ -57,6 +59,12 @@ Output is generated in `dist/`.
 ├── content/
 │   ├── projects/             # Project MDX files (managed by Tina)
 │   └── blog/                 # Blog post MDX files (managed by Tina)
+├── mockup-sage/              # HTML/CSS design mockup (reference only)
+│   ├── index.html
+│   ├── about.html
+│   ├── projects.html
+│   ├── blog.html
+│   └── contact.html
 ├── public/                   # Static assets (images, fonts, favicon)
 ├── src/
 │   ├── components/           # Reusable Astro/React components

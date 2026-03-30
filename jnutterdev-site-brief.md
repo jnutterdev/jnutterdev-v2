@@ -87,28 +87,40 @@ proficiency  string (optional)
 
 ## Design Direction
 
-Retain the existing color palette and typography feel from jnutterdev.com — dark background, clean sans-serif, minimal decorative elements. Update the layout to feel more editorial and modern.
+Signage-inspired editorial aesthetic — muted sage green background, large cream background letterform, near-black type, wayfinding-style data grid in the hero. Clean, architectural, typographically driven. Reference mockup is in `mockup-sage/`.
 
-### Suggested Color Palette (carry over)
+### Color Palette
 
 | Token | Hex | Usage |
 |---|---|---|
-| `bg-dark` | `#1a1a2e` | Page background |
-| `bg-surface` | `#2a2a3e` | Cards, nav |
-| `accent` | `#4a9eff` | Links, highlights |
-| `text-primary` | `#e0e0e8` | Body text |
-| `text-muted` | `#8888a0` | Secondary text, tags |
+| `--sage` | `#8a9d87` | Page background |
+| `--sage-dark` | `#7a8d77` | Footer top |
+| `--sage-darker` | `#6b7d68` | Footer base |
+| `--cream` | `#e4e0d4` | Background letterform, CTA text, nav button |
+| `--cream-dim` | `#d0ccbf` | Hover states |
+| `--text` | `#1c1d1a` | All body and heading text |
+| `--text-mid` | `rgba(28,29,26,0.6)` | Secondary text, labels |
+| `--text-faint` | `rgba(28,29,26,0.35)` | Muted labels, dates |
 
-> Verify these against your actual stylesheet — values are approximations from visual inspection.
+### Typography
+
+| Role | Font | Weight |
+|---|---|---|
+| Headings / display | Plus Jakarta Sans | 800 |
+| Body | Plus Jakarta Sans | 400–600 |
+| Labels / tags / nav | JetBrains Mono | 400–500 |
 
 ### Key Design Decisions
 
-- Dark theme as primary
-- Monospace font accents (for code snippets, tech tags)
-- Card-based project grid
-- Full-width hero section
-- Subtle tag/chip system for tech stack filtering
-- Minimal navigation
+- Muted sage green as the primary background — not dark, not white
+- Large cream "JN" letterform as a background graphic element in the hero
+- Mixed-case headings (not all-caps) at very large scale
+- Wayfinding-style data strip at the bottom of the hero (years exp / projects / commits / version)
+- Dark near-black CTA panel with subtle orange corner gradients for warmth
+- No border-radius — sharp corners throughout
+- Monospace font for all metadata, labels, tags, and nav links
+- Card-based project grid with a featured dark card spanning two columns
+- Minimal navigation — clean, no heavy decorations
 
 ---
 
@@ -191,8 +203,9 @@ jobs:
 
 1. **Tina CMS hosting** — Tina Cloud (free tier, easiest for live editing) vs. fully self-hosted local mode. Cloud tier is recommended for a live editorial experience.
 2. **Astro output mode** — `output: 'static'` for the full site. Switch specific routes to `hybrid` later if server-rendered features are needed.
-3. **Styling approach** — Astro scoped CSS (zero-config) or Tailwind via `@astrojs/tailwind`. Both work well.
+3. **Styling approach** — Scoped CSS matching the mockup tokens. Tailwind is an option but the mockup uses custom properties directly — plain CSS is the natural fit.
 
 ---
 
 *Brief prepared March 2026 — jnutterdev.com v2*
+*Design direction locked March 2026 — sage green variant selected from mockup-sage/*
