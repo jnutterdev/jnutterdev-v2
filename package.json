@@ -5,14 +5,23 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "npm run build && wrangler dev",
     "tina:dev": "tinacms dev -c \"astro dev\"",
-    "tina:build": "tinacms build && astro build"
+    "tina:build": "tinacms build && astro build",
+    "generate-types": "wrangler types",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.5.5",
     "@astrojs/mdx": "^5.0.6",
     "@tinacms/cli": "latest",
     "astro": "^6.3.8",
     "tinacms": "latest"
+  },
+  "devDependencies": {
+    "wrangler": "^4.95.0"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }
