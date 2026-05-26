@@ -1,0 +1,23 @@
+fragment ProjectParts on Project {
+  __typename
+  title
+  description
+  tech
+  status
+  github_url
+  live_url
+  thumbnail
+  order
+  featured
+  body
+}
+
+fragment PostParts on Post {
+  __typename
+  title
+  date
+  excerpt
+  tags
+  cover_image
+  body
+}
