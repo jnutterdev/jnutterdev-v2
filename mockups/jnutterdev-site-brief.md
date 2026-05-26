@@ -1,6 +1,8 @@
 # jnutterdev.com — Site Brief
 **v2 Redesign** | John Nutter | Full Stack Developer
 
+Building a new website for jnutterdev.com
+
 ---
 
 ## Goals
@@ -127,10 +129,19 @@ Signage-inspired editorial aesthetic — muted sage green background, large crea
 ## Skill Tags
 
 ### Core Dev
-`HTML` `CSS` `JavaScript` `React` `PHP` `Astro`
+`HTML` `CSS` `JavaScript` `React` `PHP` `Astro` `Python`
 
 ### Tools & Platforms
 `Tina CMS` `Contentful` `GitHub` `GitHub Actions` `Jira` `Confluence` `AI Prompting`
+
+---
+
+## Social Links
+
+- **GitHub:** [github.com/jnutterdev](https://github.com/jnutterdev)
+- **LinkedIn:** [linkedin.com/in/jnutterdev](https://www.linkedin.com/in/jnutterdev)
+- **Mastodon:** [@jnutterdev@mastodon.social](https://mastodon.social/@jnutterdev)
+- **Bluesky:** [@jnutterdev.bsky.social](https://bsky.app/profile/jndev.bsky.social)
 
 ---
 

@@ -1,0 +1,30 @@
+---
+title: "jnutterdev.com v2"
+description: "The redesigned portfolio — Astro for full static output, Tina CMS for git-backed editorial control, deployed via GitHub Actions rsync to a self-hosted VPS. Zero JS on load."
+tech: ["Astro", "Tina CMS", "CSS", "CI/CD"]
+status: "active"
+github_url: "https://github.com/jnutterdev/jnutterdev-v2"
+live_url: "https://jnutterdev.com"
+order: 1
+featured: true
+---
+
+## Overview
+
+Full rebuild of my personal portfolio using Astro's static output mode and Tina CMS for visual editing. The goal was a zero-client-JS experience with a solid content editing workflow that doesn't require touching code for routine updates.
+
+## Stack decisions
+
+**Astro** handles all page rendering at build time — no JS shipped to the client unless explicitly needed. Content collections provide typed, schema-validated MDX files for both projects and blog posts.
+
+**Tina CMS** sits on top of the content layer. It reads and writes the same MDX files directly via the GitHub API, so every edit in the visual editor produces a real git commit — keeping content versioned and fully recoverable.
+
+**Plain CSS** with custom properties matches the design tokens exactly. No build step needed, no class-name collisions.
+
+## Deployment
+
+Push to `main` → GitHub Actions builds (`npm run build`) → rsync to VPS over SSH. Tina edits trigger the same pipeline automatically via the same commit hook.
+
+## Learnings
+
+The Tina + Astro pairing is unusually clean. Most CMS integrations require a database or API at runtime; this one is entirely build-time. The only runtime requirement is the Tina Cloud auth layer for the editor itself.

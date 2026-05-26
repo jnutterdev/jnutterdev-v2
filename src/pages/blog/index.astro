@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
+const thisYear = new Date().getFullYear();
+
+function fmtDate(d: Date) {
+  return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+}
+---
+
+<BaseLayout title="Blog — jnutterdev" description="Devlogs, tutorials, walkthroughs, and opinions on full stack development.">
+  <section class="section">
+    <div class="wrap">
+      <div class="article-header">
+        <div class="article-header__meta">Writing</div>
+        <h1 class="article-header__title">
+          Blog &amp;<br />
+          Devlog.
+        </h1>
+      </div>
+
+      <div class="writing-layout">
+        <div class="post-list">
+          {posts.map(post => (
+            <a href={`/blog/${post.id.replace(/\.mdx?$/, '')}`} class="post-row">
+              <div class="post-row__date">{fmtDate(post.data.date)}</div>
+              <div>
+                <div class="post-row__title">{post.data.title}</div>
+                <div class="post-row__excerpt">{post.data.excerpt}</div>
+                {post.data.tags[0] && <span class="post-row__tag">{post.data.tags[0]}</span>}
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <aside class="writing-aside">
+          <div class="aside-block">
+            <div class="aside-block__label">Topics</div>
+            <div class="aside-tags">
+              {allTags.map(tag => <span class="tag">{tag}</span>)}
+            </div>
+          </div>
+          <div class="aside-block">
+            <div class="aside-block__label">Output</div>
+            <div class="aside-readout">
+              Total posts<br />
+              <span>{posts.length} entries</span><br /><br />
+              Published {thisYear}<br />
+              <span>{posts.filter(p => p.data.date.getFullYear() === thisYear).length} entries</span><br /><br />
+              Avg read time<br />
+              <span>~5 min</span>
+            </div>
+          </div>
+          <div class="aside-block">
+            <div class="aside-block__label">Format</div>
+            <div class="aside-readout">
+              Devlogs · Tutorials<br />
+              Walkthroughs · Opinions<br />
+              Project post-mortems
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

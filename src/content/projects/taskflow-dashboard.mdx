@@ -1,0 +1,25 @@
+---
+title: "TaskFlow Dashboard"
+description: "Drag-and-drop kanban board in React. Team assignment, real-time status tracking, and a clean mobile-first layout."
+tech: ["React", "JavaScript", "CSS"]
+status: "active"
+github_url: "https://github.com/jnutterdev/taskflow"
+order: 2
+featured: false
+---
+
+## Overview
+
+A kanban-style task management board built in React. Designed for small teams that want a lightweight alternative to Jira without the overhead.
+
+## Features
+
+- Drag-and-drop cards between columns using the HTML5 Drag and Drop API
+- Team member assignment per card
+- Status tracking with colour-coded indicators
+- Mobile-first responsive layout
+- Persistent state via localStorage
+
+## Build notes
+
+No external drag-and-drop library — built directly on the browser's native API to keep the bundle minimal. State management is plain React with `useReducer`; no Redux needed at this scale.

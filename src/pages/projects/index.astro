@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
+
+const allTech = [...new Set(projects.flatMap(p => p.data.tech))].sort();
+---
+
+<BaseLayout title="Projects — jnutterdev" description="A portfolio of full stack projects — React, PHP, Astro, CI/CD, and more.">
+  <section class="section">
+    <div class="wrap">
+      <div class="article-header">
+        <div class="article-header__meta">Work</div>
+        <h1 class="article-header__title">
+          All<br />
+          Projects.
+        </h1>
+      </div>
+
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        {allTech.map(tech => (
+          <button class="filter-btn" data-filter={tech}>{tech}</button>
+        ))}
+      </div>
+
+      <div class="projects-grid" id="projects-grid">
+        {projects.map((project, i) => {
+          const isFeatured = project.data.featured;
+          const cardNum = String(i + 1).padStart(3, '0');
+          return (
+            <article
+              class={`project-card${isFeatured ? ' project-card--large' : ''}`}
+              data-tech={project.data.tech.join(',')}
+            >
+              <div class="project-card__index">
+                PRJ_{cardNum}{isFeatured ? ' — Featured' : ''}
+              </div>
+              <h3 class="project-card__title">
+                <a href={`/projects/${project.id.replace(/\.mdx?$/, '')}`}>{project.data.title}</a>
+              </h3>
+              <p class="project-card__desc">{project.data.description}</p>
+              <div class="project-card__footer">
+                <div class="project-card__tags">
+                  {project.data.tech.map(t => (
+                    <span class={`tag${isFeatured ? ' tag--light' : ''}`}>{t}</span>
+                  ))}
+                </div>
+                <div class="project-card__links">
+                  {project.data.github_url && (
+                    <a href={project.data.github_url} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                  )}
+                  {project.data.live_url && (
+                    <a href={project.data.live_url} target="_blank" rel="noopener noreferrer">Live ↗</a>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const filterBar = document.getElementById('filter-bar');
+  const grid = document.getElementById('projects-grid');
+
+  filterBar?.addEventListener('click', e => {
+    const btn = (e.target as HTMLElement).closest('.filter-btn') as HTMLButtonElement | null;
+    if (!btn) return;
+
+    filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filter = btn.dataset.filter;
+    grid?.querySelectorAll<HTMLElement>('.project-card').forEach(card => {
+      if (filter === 'all' || card.dataset.tech?.split(',').includes(filter!)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+</script>

@@ -1,0 +1,52 @@
+---
+title: "GitHub Actions SSH Deploys — A Practical Guide"
+date: 2025-05-10
+excerpt: "Zero-downtime rsync to your VPS. Deploy keys, secrets, rollback — all of it documented."
+tags: ["Tutorial", "CI/CD", "Linux"]
+---
+
+Every time I set up a new project I end up Googling the same four things about SSH deploy keys in GitHub Actions. This is my attempt to write it down once.
+
+## The setup
+
+You need four things:
+
+1. An SSH key pair (generate one specifically for deploys — don't reuse your personal key)
+2. The public key added to `~/.ssh/authorized_keys` on your server
+3. The private key added as a GitHub secret (`SSH_KEY`)
+4. Host, user, and deploy path as additional secrets
+
+## The workflow file
+
+```yaml
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci && npm run build
+      - name: Deploy
+        uses: burnett01/rsync-deployments@7.0
+        with:
+          switches: -avzr --delete
+          path: dist/
+          remote_path: ${{ secrets.DEPLOY_PATH }}
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USER }}
+          remote_key: ${{ secrets.SSH_KEY }}
+```
+
+## Rollback
+
+There's no automatic rollback here — if the build fails, the old files stay on the server because rsync only runs on a successful build step. If you push bad code that deploys successfully, you'll need to revert the commit and push again.
+
+For most static sites, this is fine.

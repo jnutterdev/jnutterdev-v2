@@ -1,0 +1,16 @@
+---
+const pathname = Astro.url.pathname;
+---
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo">jnutter<em>.dev</em></a>
+    <ul class="nav__links">
+      <li><a href="/" class={pathname === '/' ? 'active' : ''}>Home</a></li>
+      <li><a href="/about" class={pathname === '/about' ? 'active' : ''}>About</a></li>
+      <li><a href="/projects" class={pathname.startsWith('/projects') ? 'active' : ''}>Projects</a></li>
+      <li><a href="/blog" class={pathname.startsWith('/blog') ? 'active' : ''}>Blog</a></li>
+      <li><a href="/contact" class="nav__cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>

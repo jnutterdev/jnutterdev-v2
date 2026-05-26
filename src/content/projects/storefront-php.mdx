@@ -1,0 +1,24 @@
+---
+title: "Storefront PHP"
+description: "Lightweight PHP e-commerce storefront — custom cart logic, flat-file product catalogue. No framework required."
+tech: ["PHP", "CSS", "JavaScript"]
+status: "active"
+github_url: "https://github.com/jnutterdev/storefront-php"
+order: 3
+featured: false
+---
+
+## Overview
+
+A minimal e-commerce storefront written in vanilla PHP. No framework, no ORM, no external dependencies. Products are defined in flat JSON files; the cart runs on sessions.
+
+## Why frameworkless?
+
+The brief was a low-traffic product showcase for a client who wanted to self-host on cheap shared hosting. A full Laravel or Symfony app would be overkill — this runs on any PHP 8+ server with no `composer install`.
+
+## Features
+
+- Flat-file product catalogue (JSON)
+- Session-based cart
+- Stripe Checkout integration via redirect
+- Simple admin panel for managing products via file writes

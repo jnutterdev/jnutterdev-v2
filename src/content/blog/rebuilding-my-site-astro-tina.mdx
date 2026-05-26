@@ -1,0 +1,30 @@
+---
+title: "Rebuilding My Site with Astro & Tina CMS"
+date: 2025-06-01
+excerpt: "Full walkthrough of the v2 build — decisions, tradeoffs, and the deployment pipeline that actually worked."
+tags: ["Devlog", "Astro", "Tina CMS"]
+---
+
+The v2 rebuild of this site has been on my list since I outgrew the previous setup. Here's what I built, why I made the choices I did, and what I'd do differently.
+
+## Why Astro?
+
+I've built with Next.js and Gatsby before. Both are solid, but they ship more JavaScript than a portfolio site needs. Astro's default-zero-JS output is a genuinely different mental model — you opt *in* to interactivity rather than opting out.
+
+For a site that's mostly static content, that's the right default.
+
+## Why Tina CMS?
+
+The alternative was hardcoding content in MDX files and never updating it. I've done that before. It works until you want to fix a typo from your phone.
+
+Tina gives you a visual editor that writes directly to Git. No database, no API keys at runtime, no third-party data store to migrate away from later. The content is always in the repo.
+
+## The deployment pipeline
+
+Push to main → GitHub Actions builds → rsync to VPS. The Tina editor does the same thing — every save is a commit, every commit triggers the pipeline.
+
+It's boring in the best possible way.
+
+## What I'd change
+
+The Tina setup is slightly more involved than I expected — the schema config and the Astro content collections schema need to stay in sync manually. Worth it, but worth knowing upfront.

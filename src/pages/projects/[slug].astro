@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.id.replace(/\.mdx?$/, '') },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<BaseLayout title={`${project.data.title} — jnutterdev`} description={project.data.description}>
+  <div class="wrap">
+    <div class="article-header">
+      <a href="/projects" class="article-header__back">Projects</a>
+      <div class="article-header__meta">
+        {project.data.status === 'active' ? 'Active project' : 'Archived'}
+        {project.data.featured && ' — Featured'}
+      </div>
+      <h1 class="article-header__title">{project.data.title}</h1>
+      <p class="article-header__excerpt">{project.data.description}</p>
+    </div>
+  </div>
+
+  <div class="wrap section--tight">
+    <div class="detail-layout">
+      <article class="prose">
+        <Content />
+      </article>
+
+      <aside class="writing-aside">
+        <div class="aside-block">
+          <div class="aside-block__label">Stack</div>
+          <div class="aside-tags">
+            {project.data.tech.map(t => <span class="tag">{t}</span>)}
+          </div>
+        </div>
+
+        {(project.data.github_url || project.data.live_url) && (
+          <div class="aside-block">
+            <div class="aside-block__label">Links</div>
+            <div class="social-links">
+              {project.data.github_url && (
+                <a href={project.data.github_url} class="social-link" target="_blank" rel="noopener noreferrer">
+                  GitHub
+                </a>
+              )}
+              {project.data.live_url && project.data.live_url !== '#' && (
+                <a href={project.data.live_url} class="social-link" target="_blank" rel="noopener noreferrer">
+                  Live site
+                </a>
+              )}
+            </div>
+          </div>
+        )}
+
+        <div class="aside-block">
+          <div class="aside-block__label">Status</div>
+          <div class="aside-readout">
+            <span style="text-transform: capitalize;">{project.data.status}</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

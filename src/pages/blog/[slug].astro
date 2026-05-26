@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id.replace(/\.mdx?$/, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function fmtDate(d: Date) {
+  return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
+---
+
+<BaseLayout title={`${post.data.title} — jnutterdev`} description={post.data.excerpt}>
+  <div class="wrap">
+    <div class="article-header">
+      <a href="/blog" class="article-header__back">Blog</a>
+      <div class="article-header__meta">{fmtDate(post.data.date)}</div>
+      <h1 class="article-header__title">{post.data.title}</h1>
+      <p class="article-header__excerpt">{post.data.excerpt}</p>
+    </div>
+  </div>
+
+  <div class="wrap section--tight">
+    <div class="detail-layout">
+      <article class="prose">
+        <Content />
+      </article>
+
+      <aside class="writing-aside">
+        <div class="aside-block">
+          <div class="aside-block__label">Tags</div>
+          <div class="aside-tags">
+            {post.data.tags.map(tag => <span class="tag">{tag}</span>)}
+          </div>
+        </div>
+        <div class="aside-block">
+          <div class="aside-block__label">Published</div>
+          <div class="aside-readout">
+            <span>{fmtDate(post.data.date)}</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

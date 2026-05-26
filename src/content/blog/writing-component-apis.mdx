@@ -1,0 +1,30 @@
+---
+title: "Writing Component APIs That Don't Suck"
+date: 2025-04-15
+excerpt: "The small prop-design habits that make a library enjoyable six months after you wrote it."
+tags: ["React", "Opinion"]
+---
+
+I've inherited enough React component libraries to have opinions about what makes a prop API feel good vs. feel like archaeology.
+
+## The core rule
+
+A component's props should describe *what* the user wants, not *how* the component works internally.
+
+Bad: `<Button variant={2} />`. Good: `<Button size="lg" />`.
+
+The first leaks implementation. The second describes intent.
+
+## Booleans for states, not features
+
+Prefer `<Button loading />` over `<Button state="loading" />` when there's only one state worth naming. But if you have three mutually exclusive states, an enum is cleaner than three booleans that can conflict.
+
+## Don't guess the future
+
+The worst components I've maintained were "flexible" — they tried to anticipate every possible use case and ended up impossible to understand.
+
+Write the component for the use case you have. When you hit a new use case, refactor. You'll know more then than you do now.
+
+## Document the constraints
+
+If `children` and `label` can't coexist, say so in a TypeScript type. The error "unexpected output" at runtime is not documentation.

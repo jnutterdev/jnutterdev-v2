@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const coreSkills = ['HTML', 'CSS', 'JavaScript', 'React', 'PHP', 'Astro', 'Python'];
+const toolSkills = ['Tina CMS', 'Contentful', 'GitHub', 'GitHub Actions', 'Jira', 'Confluence', 'AI Prompting'];
+---
+
+<BaseLayout title="About — jnutterdev" description="Full Stack Developer based in Decatur, GA. I build React interfaces, PHP backends, Astro sites, and the CI/CD pipelines that keep them running.">
+  <section class="section">
+    <div class="wrap">
+      <div class="article-header">
+        <div class="article-header__meta">About</div>
+        <h1 class="article-header__title">
+          Building for<br />
+          the web,<br />
+          for real.
+        </h1>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <p class="about-bio">
+            I'm John Nutter, a full stack developer based in Decatur, GA. I work across
+            the full stack — React interfaces, PHP backends, Astro-powered static sites,
+            and the CI/CD pipelines that keep everything running.
+          </p>
+          <p class="about-bio">
+            Most of my work sits at the intersection of developer tooling and editorial
+            content systems. I care about maintainability: code that a team can work in
+            six months from now, content systems that editors can actually use, and
+            deploy pipelines that fail loudly and recover cleanly.
+          </p>
+
+          <div class="skills-block">
+            <div class="skills-block__label">Core Dev</div>
+            <div class="skills-tags">
+              {coreSkills.map(s => <span class="tag">{s}</span>)}
+            </div>
+          </div>
+
+          <div class="skills-block">
+            <div class="skills-block__label">Tools &amp; Platforms</div>
+            <div class="skills-tags">
+              {toolSkills.map(s => <span class="tag">{s}</span>)}
+            </div>
+          </div>
+        </div>
+
+        <aside class="about-aside">
+          <div class="aside-block">
+            <div class="aside-block__label">Status</div>
+            <div class="aside-readout">
+              <span>Open to opportunities</span><br />
+              Full-time &amp; project work
+            </div>
+          </div>
+          <div class="aside-block">
+            <div class="aside-block__label">Location</div>
+            <div class="aside-readout">
+              <span>Decatur, GA</span><br />
+              USA — EST / UTC−5
+            </div>
+          </div>
+          <div class="aside-block">
+            <div class="aside-block__label">Find me</div>
+            <div class="social-links">
+              <a href="https://github.com/jnutterdev" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://www.linkedin.com/in/jnutterdev" class="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://mastodon.social/@jnutterdev" class="social-link" target="_blank" rel="noopener noreferrer">Mastodon</a>
+              <a href="https://bsky.app/profile/jndev.bsky.social" class="social-link" target="_blank" rel="noopener noreferrer">Bluesky</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

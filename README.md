@@ -139,6 +139,7 @@ See `.github/workflows/deploy.yml` for the full workflow configuration.
 - **GitHub:** [github.com/jnutterdev](https://github.com/jnutterdev)
 - **LinkedIn:** [linkedin.com/in/jnutterdev](https://www.linkedin.com/in/jnutterdev)
 - **Mastodon:** [@jnutterdev@mastodon.social](https://mastodon.social/@jnutterdev)
+- **Bluesky:** [@jnutterdev.bsky.social](https://bsky.app/profile/jndev.bsky.social)
 
 ---
 
