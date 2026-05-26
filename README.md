@@ -20,7 +20,7 @@ The design uses a signage-inspired editorial aesthetic: muted sage green, large 
 
 ### Prerequisites
 
-- Node.js 20+
+- Node.js 24.16.0 (LTS)
 - npm
 
 ### Install
@@ -56,19 +56,16 @@ Output is generated in `dist/`.
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml        # CI/CD pipeline
-├── content/
-│   ├── projects/             # Project MDX files (managed by Tina)
-│   └── blog/                 # Blog post MDX files (managed by Tina)
 ├── mockup-sage/              # HTML/CSS design mockup (reference only)
-│   ├── index.html
-│   ├── about.html
-│   ├── projects.html
-│   ├── blog.html
-│   └── contact.html
-├── public/                   # Static assets (images, fonts, favicon)
+│   └── index.html
+├── public/                   # Static assets (favicon, images)
 ├── src/
-│   ├── components/           # Reusable Astro/React components
-│   ├── layouts/              # Page layout wrappers
+│   ├── components/           # Nav, Footer, CTAStrip
+│   ├── content/
+│   │   ├── blog/             # Blog post MDX files (managed by Tina)
+│   │   └── projects/         # Project MDX files (managed by Tina)
+│   ├── content.config.ts     # Content collection schemas (Astro 6)
+│   ├── layouts/              # BaseLayout wrapper
 │   ├── pages/                # Astro pages and dynamic routes
 │   │   ├── index.astro
 │   │   ├── about.astro
@@ -79,7 +76,8 @@ Output is generated in `dist/`.
 │   │   └── blog/
 │   │       ├── index.astro
 │   │       └── [slug].astro
-│   └── styles/               # Global CSS
+│   └── styles/
+│       └── global.css        # Design tokens + all page styles
 ├── tina/
 │   └── config.ts             # Tina CMS schema definition
 ├── astro.config.mjs
@@ -95,8 +93,8 @@ Content is managed via [Tina CMS](https://tina.io) and stored as Markdown/MDX fi
 
 ### Content types
 
-- **Projects** — `content/projects/[slug].mdx`
-- **Blog posts** — `content/blog/[slug].mdx`
+- **Projects** — `src/content/projects/[slug].mdx`
+- **Blog posts** — `src/content/blog/[slug].mdx`
 
 To edit content locally, run the dev server and navigate to `/admin`.
 
@@ -120,6 +118,8 @@ Deployments are handled automatically via GitHub Actions on every push to `main`
 | `SSH_HOST` | Production server hostname or IP |
 | `SSH_USER` | SSH username |
 | `SSH_KEY` | Private SSH key for deploy access |
+| `TINA_CLIENT_ID` | Client ID from Tina Cloud project settings |
+| `TINA_TOKEN` | Read/write token from Tina Cloud project settings |
 
 See `.github/workflows/deploy.yml` for the full workflow configuration.
 
@@ -127,9 +127,9 @@ See `.github/workflows/deploy.yml` for the full workflow configuration.
 
 ## Local Development Notes
 
-- Tina CMS runs in local mode during development — no cloud auth required
-- Content changes made via the local editor write directly to the `content/` directory
-- PHP contact form handler (if used) requires a server with PHP support — not available in the static build output
+- Running `npm run tina:dev` requires `TINA_CLIENT_ID` and `TINA_TOKEN` set in a `.env` file — get these from your Tina Cloud project settings
+- Content changes made via the Tina editor write directly to `src/content/` as MDX files and commit to the repo
+- The contact form uses Formspree — replace `YOUR_FORM_ID` in `src/pages/contact.astro` with your real form ID
 
 ---
 
@@ -143,4 +143,4 @@ See `.github/workflows/deploy.yml` for the full workflow configuration.
 
 ---
 
-© 2018–2025 John Nutter
+© 2018–2026 John Nutter
