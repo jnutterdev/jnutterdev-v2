@@ -17,6 +17,8 @@
   --cream-faint: rgba(228, 224, 212, 0.3);
   --border: rgba(28, 29, 26, 0.14);
   --border-cream: rgba(228, 224, 212, 0.22);
+  --accent: #e8437a;
+  --accent-dim: rgba(232, 67, 122, 0.15);
 
   --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
@@ -141,7 +143,8 @@ img {
 
 .nav__links a:hover,
 .nav__links a.active {
-  color: var(--text);
+  color: var(--accent);
+  text-shadow: 0 0 0px rgba(0, 0, 0, 0.34);
 }
 
 .nav__links a.active {
@@ -588,8 +591,9 @@ img {
 }
 
 .view-all:hover {
-  color: var(--text);
-  border-color: var(--text);
+  color: var(--accent);
+  border-color: var(--accent);
+  text-shadow: 0 0 0px rgba(0, 0, 0, 0.34);
 }
 
 .view-all::after {
@@ -813,7 +817,8 @@ img {
   padding-left: 8px;
 }
 .post-row:hover .post-row__title {
-  color: var(--text);
+  color: var(--accent);
+  text-shadow: 0 0 0px rgba(0, 0, 0, 0.34);
 }
 
 .post-row__date {
@@ -1031,11 +1036,27 @@ img {
   transition: color 0.15s;
 }
 
-.footer__links a:first-child {
-  border-left: 1px solid var(--border);
-}
 .footer__links a:hover {
   color: var(--text);
+}
+
+.footer__social {
+  gap: 4px;
+}
+
+.footer__social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-mid);
+  padding: 6px;
+  border: none;
+  transition: color 0.15s, text-shadow 0.15s;
+}
+
+.footer__social a:hover {
+  color: var(--accent);
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.34));
 }
 
 .footer__copy {
@@ -1070,8 +1091,9 @@ img {
   content: "←";
 }
 .article-header__back:hover {
-  color: var(--text);
+  color: var(--accent);
   gap: 12px;
+  text-shadow: 0 0 0px rgba(0, 0, 0, 0.34);
 }
 
 .article-header__meta {
@@ -1178,7 +1200,9 @@ img {
 }
 
 .prose a:hover {
-  border-color: var(--text);
+  color: var(--accent);
+  border-color: var(--accent);
+  text-shadow: 0 0 0px rgba(0, 0, 0, 0.34);
 }
 
 .prose blockquote {
@@ -1299,8 +1323,9 @@ img {
   border-top: 1px solid var(--border);
 }
 .social-link:hover {
-  color: var(--text);
+  color: var(--accent);
   padding-left: 8px;
+  text-shadow: 0 0 0px rgba(0, 0, 0, 0.34);
 }
 .social-link::after {
   content: "↗";
