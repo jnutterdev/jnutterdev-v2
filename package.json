@@ -17,6 +17,7 @@
     "@astrojs/mdx": "^5.0.6",
     "@tinacms/cli": "latest",
     "astro": "^6.3.8",
+    "normalize.css": "^8.0.1",
     "tinacms": "latest"
   }
 }
