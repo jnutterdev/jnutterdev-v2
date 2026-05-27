@@ -1,6 +1,6 @@
 # jnutterdev.com
 
-Personal portfolio and developer site for John Nutter — full stack developer based in Decatur, GA. Built with Astro and Tina CMS, self-hosted with GitHub Actions CI/CD.
+Personal portfolio and developer site for John Nutter — full stack developer based in Decatur, GA. Built with Astro and Tina CMS, deployed to Cloudflare Workers via GitHub Actions.
 
 The design uses a signage-inspired editorial aesthetic: muted sage green, large cream letterform, near-black type, and a wayfinding-style data grid in the hero. Reference mockup is in `mockup-sage/`.
 
@@ -9,10 +9,10 @@ The design uses a signage-inspired editorial aesthetic: muted sage green, large 
 ## Tech Stack
 
 - **Framework:** [Astro](https://astro.build)
-- **CMS:** [Tina CMS](https://tina.io) (Git-backed, visual editor)
+- **CMS:** [Tina CMS](https://tina.io) (Git-backed, Tina Cloud)
 - **Styling:** CSS (scoped)
-- **Hosting:** Self-hosted VPS
-- **CI/CD:** GitHub Actions → SSH/rsync deploy
+- **Hosting:** Cloudflare Workers
+- **CI/CD:** GitHub Actions → Cloudflare Workers (via Wrangler)
 
 ---
 
@@ -21,7 +21,7 @@ The design uses a signage-inspired editorial aesthetic: muted sage green, large 
 ### Prerequisites
 
 - Node.js 24.16.0 (LTS)
-- npm
+- npm 11
 
 ### Install
 
@@ -37,7 +37,15 @@ npm install
 npm run dev
 ```
 
-The site runs at `http://localhost:4321`. Tina CMS editor is available at `http://localhost:4321/admin`.
+The site runs at `http://localhost:4321`.
+
+### Run locally with Tina CMS editor
+
+```bash
+npm run tina:dev
+```
+
+The site runs at `http://localhost:4321` and the Tina editor is available at `http://localhost:4321/admin`. Requires `TINA_CLIENT_ID` and `TINA_TOKEN` in a `.env` file.
 
 ### Build
 
@@ -80,6 +88,7 @@ Output is generated in `dist/`.
 │       └── global.css        # Design tokens + all page styles
 ├── tina/
 │   └── config.ts             # Tina CMS schema definition
+├── wrangler.toml             # Cloudflare Workers config
 ├── astro.config.mjs
 ├── package.json
 └── README.md
@@ -89,47 +98,36 @@ Output is generated in `dist/`.
 
 ## Content Management
 
-Content is managed via [Tina CMS](https://tina.io) and stored as Markdown/MDX files in the `content/` directory. All edits made through the Tina editor are committed directly to the repository, which triggers an automatic deploy.
+Content is managed via [Tina CMS](https://tina.io) and stored as Markdown/MDX files in `src/content/`. All edits made through the Tina editor are committed directly to the repository, which triggers an automatic deploy.
 
 ### Content types
 
 - **Projects** — `src/content/projects/[slug].mdx`
 - **Blog posts** — `src/content/blog/[slug].mdx`
 
-To edit content locally, run the dev server and navigate to `/admin`.
+To edit content locally, run `npm run tina:dev` and navigate to `/admin`.
 
 ---
 
 ## Deployment
 
-Deployments are handled automatically via GitHub Actions on every push to `main`.
+Deployments are handled automatically via GitHub Actions on every push to `main`. The build runs in GitHub Actions (which handles the memory-intensive Tina build step), then deploys directly to Cloudflare Workers via Wrangler. Cloudflare has no build command configured — it only serves what GitHub Actions pushes.
 
 ### Pipeline steps
 
 1. Checkout repo
 2. Install dependencies (`npm ci`)
-3. Build site (`npm run build`)
-4. Rsync `dist/` to the production server over SSH
+3. Build site (`npm run tina:build`)
+4. Deploy `dist/` to Cloudflare Workers (`wrangler deploy`)
 
 ### Required GitHub secrets
 
 | Secret | Description |
 |---|---|
-| `SSH_HOST` | Production server hostname or IP |
-| `SSH_USER` | SSH username |
-| `SSH_KEY` | Private SSH key for deploy access |
 | `TINA_CLIENT_ID` | Client ID from Tina Cloud project settings |
 | `TINA_TOKEN` | Read/write token from Tina Cloud project settings |
-
-See `.github/workflows/deploy.yml` for the full workflow configuration.
-
----
-
-## Local Development Notes
-
-- Running `npm run tina:dev` requires `TINA_CLIENT_ID` and `TINA_TOKEN` set in a `.env` file — get these from your Tina Cloud project settings
-- Content changes made via the Tina editor write directly to `src/content/` as MDX files and commit to the repo
-- The contact form uses Formspree — replace `YOUR_FORM_ID` in `src/pages/contact.astro` with your real form ID
+| `CLOUDFLARE_API_TOKEN` | API token with "Edit Cloudflare Workers" permissions |
+| `CLOUDFLARE_ACCOUNT_ID` | Found in the Cloudflare Workers dashboard sidebar |
 
 ---
 
