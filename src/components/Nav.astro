@@ -2,7 +2,7 @@
 const pathname = Astro.url.pathname;
 ---
 
-<nav class="nav">
+<nav class="nav" id="main-nav">
   <div class="nav__inner">
     <a href="/" class="nav__logo">jnutter<em>.dev</em></a>
     <ul class="nav__links">
@@ -12,5 +12,39 @@ const pathname = Astro.url.pathname;
       <li><a href="/blog" class={pathname.startsWith('/blog') ? 'active' : ''}>Blog</a></li>
       <li><a href="/contact" class="nav__cta">Contact</a></li>
     </ul>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false" id="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class="nav__mobile" id="nav-mobile" aria-hidden="true">
+    <ul>
+      <li><a href="/" class={pathname === '/' ? 'active' : ''}>Home</a></li>
+      <li><a href="/about" class={pathname === '/about' ? 'active' : ''}>About</a></li>
+      <li><a href="/projects" class={pathname.startsWith('/projects') ? 'active' : ''}>Projects</a></li>
+      <li><a href="/blog" class={pathname.startsWith('/blog') ? 'active' : ''}>Blog</a></li>
+      <li><a href="/contact" class="nav__cta">Contact</a></li>
+    </ul>
   </div>
 </nav>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const mobile = document.getElementById('nav-mobile');
+  const nav = document.getElementById('main-nav');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('nav--open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    mobile?.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  mobile?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      nav?.classList.remove('nav--open');
+      toggle?.setAttribute('aria-expanded', 'false');
+      mobile?.setAttribute('aria-hidden', 'true');
+    });
+  });
+</script>
