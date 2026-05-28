@@ -1,0 +1,16 @@
+---
+title: Library not found
+date: 2020-02-13
+excerpt: Coming back to Jekyll after a few months away, hit a Digest::SHA2 LoadError that nothing on Stack Overflow could fix — until I just nuked and reinstalled Ruby.
+tags: ["ruby", "debugging", "jekyll"]
+---
+
+It's been a while since I've worked on any projects lately, so I decided that it will get me back into the swing of things if I start writing about a project. I didn't have the repo cloned or this site, so the first thing I did was pull it down from GitHub.
+
+Next, I tried to fire up [Jekyll](https://jekyllrb.com/). I got an error: "library not found for class Digest::SHA2 -- digest/sha2 (LoadError)". Crap. What is that all about? Nothing has changed since my last post; what gives?
+
+I searched around for a little while, but Stack Overflow was letting me down. Some folks were saying to try this thing or edit that module — many things that didn't seem relevant to my situation. To see if it may have been specific to my Ruby version, I tried using an older version with [rbenv](https://github.com/rbenv/rbenv). No luck. I got a host of other errors.
+
+Finally, I did the only sensible thing I could think of: `rbenv uninstall ruby 2.5.1`. Afterward, I re-installed Jekyll and Bundler, updated my gems, and ran `bundle install`. It works! I was so relieved.
+
+Now that I have a working Jekyll setup, expect more posts to come soon. I will be looking into a few different projects, either with Ruby on Rails or Flask. Stay tuned.
