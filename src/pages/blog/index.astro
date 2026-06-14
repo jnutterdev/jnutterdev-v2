@@ -9,7 +9,7 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
 const thisYear = new Date().getFullYear();
 
 function fmtDate(d: Date) {
-  return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' });
 }
 ---
 

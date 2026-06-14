@@ -1,23 +1,33 @@
 ---
 title: "AI Prompting as a Dev Skill"
-date: 2025-03-22
-excerpt: "Not magic, not a replacement. But a learnable tool that changes how you actually work."
-tags: ["Opinion", "AI"]
+date: 2026-03-22T00:00:00-05:00
+excerpt: "Not magic, not a replacement. But a learnable tool that changes how you actually work — here's how it changed mine."
+tags: ["Devlog", "AI"]
 ---
 
 There's a version of this conversation where AI tools are either going to replace developers or are completely useless for real work. Neither is true and both are boring.
 
-## What actually changed for me
+Here's what it actually looks like in practice, at least for me.
 
-I write less boilerplate and more intent. The part of coding that felt like translating a clear idea into tedious syntax — that part is genuinely faster now.
+## What I actually use it for
 
-The part that requires understanding what to build, why, and whether it's the right call? Unchanged.
+The most consistent wins have been the stuff that's tedious but not hard — scaffolding a new component with the right structure, setting up a GitHub Actions workflow, generating boilerplate I know exactly what should look like but don't want to type out.
+
+I've also leaned on it heavily for things outside my primary stack. Setting up a `CLAUDE.md` / `AGENTS.md` context system across my projects so that Claude Code and Zed's agent panel both understand my conventions — that saved a lot of back-and-forth. Same with generating a fully designed PDF resume using ReportLab, a Python library I'd never touched before. I knew what I wanted, described it clearly, and iterated from there.
+
+Debugging is another good one. Sometimes you just need a second set of eyes on why something isn't behaving the way you expect. The turnaround is fast and it doesn't get tired of looking at the same file.
 
 ## Prompting is a craft
 
 Garbage in, garbage out. The quality of what you get out of an LLM is directly proportional to how well you describe the problem, the constraints, and what good looks like.
 
 That's a skill. It takes practice. It rewards domain expertise — you have to know enough to evaluate the output.
+
+## Where I still have to take over
+
+The output is rarely wrong in a breaking way — it's usually wrong in subtle ways. Styling choices that are close but not quite right. Wording that's a bit too stiff or formal. Copy that says the right thing but doesn't sound like me.
+
+That last one is actually the most common place I step in. AI-generated prose has a particular texture to it — slightly too complete, slightly too even. A quick pass to soften the wording or cut a sentence usually fixes it.
 
 ## The trap
 

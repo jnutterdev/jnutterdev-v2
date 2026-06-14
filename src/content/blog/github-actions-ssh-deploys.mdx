@@ -1,22 +1,26 @@
 ---
-title: "GitHub Actions SSH Deploys — A Practical Guide"
-date: 2025-05-10
-excerpt: "Zero-downtime rsync to your VPS. Deploy keys, secrets, rollback — all of it documented."
-tags: ["Tutorial", "CI/CD", "Linux"]
+title: "How I Used to Deploy: GitHub Actions + SSH + rsync"
+date: 2026-05-09
+excerpt: "Before I moved everything to Cloudflare Pages, this was my deploy pipeline. It worked well — here's how it was set up."
+tags: ["Devlog", "CI/CD", "Linux"]
 ---
 
-Every time I set up a new project I end up Googling the same four things about SSH deploy keys in GitHub Actions. This is my attempt to write it down once.
+Before I moved all my projects to Cloudflare Pages, I was running a self-hosted VPS and deploying everything via rsync over SSH through GitHub Actions. It was a solid setup — boring in the best way — and I ended up using the same pattern across most of my personal projects.
+
+I'm documenting it here partly for posterity, partly because I still think it's a good approach if you're running your own server.
 
 ## The setup
 
 You need four things:
 
-1. An SSH key pair (generate one specifically for deploys — don't reuse your personal key)
+1. An SSH key pair — generate one specifically for deploys, don't reuse your personal key
 2. The public key added to `~/.ssh/authorized_keys` on your server
 3. The private key added as a GitHub secret (`SSH_KEY`)
 4. Host, user, and deploy path as additional secrets
 
 ## The workflow file
+
+This is the pattern I settled on after a few iterations. Nothing fancy — build, then rsync the `dist/` folder to the server.
 
 ```yaml
 name: Deploy
@@ -47,6 +51,12 @@ jobs:
 
 ## Rollback
 
-There's no automatic rollback here — if the build fails, the old files stay on the server because rsync only runs on a successful build step. If you push bad code that deploys successfully, you'll need to revert the commit and push again.
+No automatic rollback — if the build fails, the old files stay on the server because rsync only runs after a successful build step. If you push bad code that deploys successfully, revert the commit and push again.
 
-For most static sites, this is fine.
+For static sites, this is almost always fine.
+
+## Why I moved to Cloudflare Pages
+
+Honestly, the VPS setup worked great. The reason I switched wasn't that it broke — it was that Cloudflare Pages removed a whole layer of maintenance. No server to patch, no SSH keys to rotate, no worrying about disk space. Push to main and it just deploys.
+
+If you're already paying for a VPS and comfortable managing it, the rsync approach is totally viable. But if you're starting fresh, Cloudflare Pages is hard to argue with for static sites.
