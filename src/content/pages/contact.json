@@ -1,13 +1,25 @@
 {
   "heading": "Let's talk\nabout your\nproject.",
-  "email": "john@jnutterdev.com",
+  "email": "hello@jnutter.dev",
   "formspree_id": "YOUR_FORM_ID",
   "status_label": "Open to opportunities",
   "status_sub": "Full-time & project work",
   "social_links": [
-    { "label": "GitHub", "url": "https://github.com/jnutterdev" },
-    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/jnutterdev" },
-    { "label": "Mastodon", "url": "https://mastodon.social/@jnutterdev" },
-    { "label": "Bluesky", "url": "https://bsky.app/profile/jndev.bsky.social" }
+    {
+      "label": "GitHub",
+      "url": "https://github.com/jnutterdev"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/jnutterdev"
+    },
+    {
+      "label": "Mastodon",
+      "url": "https://mastodon.social/@jnutterdev"
+    },
+    {
+      "label": "Bluesky",
+      "url": "https://bsky.app/profile/jndev.bsky.social"
+    }
   ]
 }
