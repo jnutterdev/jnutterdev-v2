@@ -161,6 +161,7 @@ type AboutPageSocial_links {
 }
 
 type AboutPage implements Node & Document {
+  profile_image: String
   heading: String
   bio_1: String
   bio_2: String
@@ -176,12 +177,20 @@ type AboutPage implements Node & Document {
   _values: JSON!
 }
 
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
 input AboutPageSocial_linksFilter {
   label: StringFilter
   url: StringFilter
 }
 
 input AboutPageFilter {
+  profile_image: ImageFilter
   heading: StringFilter
   bio_1: StringFilter
   bio_2: StringFilter
@@ -287,13 +296,6 @@ type Project implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input ImageFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
 }
 
 input NumberFilter {
@@ -442,6 +444,7 @@ input AboutPageSocial_linksMutation {
 }
 
 input AboutPageMutation {
+  profile_image: String
   heading: String
   bio_1: String
   bio_2: String

@@ -1402,6 +1402,21 @@ img {
 /* ============================================================
    ABOUT PAGE
 ============================================================ */
+.article-header__title-row {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-photo {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 280px;

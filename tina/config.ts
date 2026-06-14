@@ -50,6 +50,7 @@ export default defineConfig({
         format: 'json',
         ui: { allowedActions: { create: false, delete: false } },
         fields: [
+          { type: 'image', name: 'profile_image', label: 'Profile Image' },
           { type: 'string', name: 'heading', label: 'Heading', ui: { component: 'textarea' } },
           { type: 'string', name: 'bio_1', label: 'Bio Paragraph 1', ui: { component: 'textarea' } },
           { type: 'string', name: 'bio_2', label: 'Bio Paragraph 2', ui: { component: 'textarea' } },

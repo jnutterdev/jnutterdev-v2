@@ -319,6 +319,7 @@ export type AboutPageSocial_Links = {
 
 export type AboutPage = Node & Document & {
   __typename?: 'AboutPage';
+  profile_image?: Maybe<Scalars['String']['output']>;
   heading?: Maybe<Scalars['String']['output']>;
   bio_1?: Maybe<Scalars['String']['output']>;
   bio_2?: Maybe<Scalars['String']['output']>;
@@ -334,12 +335,20 @@ export type AboutPage = Node & Document & {
   _values: Scalars['JSON']['output'];
 };
 
+export type ImageFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type AboutPageSocial_LinksFilter = {
   label?: InputMaybe<StringFilter>;
   url?: InputMaybe<StringFilter>;
 };
 
 export type AboutPageFilter = {
+  profile_image?: InputMaybe<ImageFilter>;
   heading?: InputMaybe<StringFilter>;
   bio_1?: InputMaybe<StringFilter>;
   bio_2?: InputMaybe<StringFilter>;
@@ -455,13 +464,6 @@ export type Project = Node & Document & {
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-};
-
-export type ImageFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type NumberFilter = {
@@ -721,6 +723,7 @@ export type AboutPageSocial_LinksMutation = {
 };
 
 export type AboutPageMutation = {
+  profile_image?: InputMaybe<Scalars['String']['input']>;
   heading?: InputMaybe<Scalars['String']['input']>;
   bio_1?: InputMaybe<Scalars['String']['input']>;
   bio_2?: InputMaybe<Scalars['String']['input']>;
@@ -777,7 +780,7 @@ export type PostMutation = {
 
 export type HomePagePartsFragment = { __typename: 'HomePage', hero_label?: string | null, hero_heading?: string | null, hero_bio?: string | null, status_label?: string | null, status_sub?: string | null, location?: string | null, location_sub?: string | null, latest_project?: string | null, latest_project_sub?: string | null, stat_years?: string | null, stat_skills_detail?: string | null, stat_commits?: string | null, stat_site_version?: string | null };
 
-export type AboutPagePartsFragment = { __typename: 'AboutPage', heading?: string | null, bio_1?: string | null, bio_2?: string | null, core_skills?: Array<string | null> | null, tool_skills?: Array<string | null> | null, status_label?: string | null, status_sub?: string | null, location?: string | null, location_sub?: string | null, social_links?: Array<{ __typename: 'AboutPageSocial_links', label?: string | null, url?: string | null } | null> | null };
+export type AboutPagePartsFragment = { __typename: 'AboutPage', profile_image?: string | null, heading?: string | null, bio_1?: string | null, bio_2?: string | null, core_skills?: Array<string | null> | null, tool_skills?: Array<string | null> | null, status_label?: string | null, status_sub?: string | null, location?: string | null, location_sub?: string | null, social_links?: Array<{ __typename: 'AboutPageSocial_links', label?: string | null, url?: string | null } | null> | null };
 
 export type ContactPagePartsFragment = { __typename: 'ContactPage', heading?: string | null, email?: string | null, formspree_id?: string | null, status_label?: string | null, status_sub?: string | null, social_links?: Array<{ __typename: 'ContactPageSocial_links', label?: string | null, url?: string | null } | null> | null };
 
@@ -811,7 +814,7 @@ export type AboutPageQueryVariables = Exact<{
 }>;
 
 
-export type AboutPageQuery = { __typename?: 'Query', aboutPage: { __typename: 'AboutPage', id: string, heading?: string | null, bio_1?: string | null, bio_2?: string | null, core_skills?: Array<string | null> | null, tool_skills?: Array<string | null> | null, status_label?: string | null, status_sub?: string | null, location?: string | null, location_sub?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, social_links?: Array<{ __typename: 'AboutPageSocial_links', label?: string | null, url?: string | null } | null> | null } };
+export type AboutPageQuery = { __typename?: 'Query', aboutPage: { __typename: 'AboutPage', id: string, profile_image?: string | null, heading?: string | null, bio_1?: string | null, bio_2?: string | null, core_skills?: Array<string | null> | null, tool_skills?: Array<string | null> | null, status_label?: string | null, status_sub?: string | null, location?: string | null, location_sub?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, social_links?: Array<{ __typename: 'AboutPageSocial_links', label?: string | null, url?: string | null } | null> | null } };
 
 export type AboutPageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -823,7 +826,7 @@ export type AboutPageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type AboutPageConnectionQuery = { __typename?: 'Query', aboutPageConnection: { __typename?: 'AboutPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutPageConnectionEdges', cursor: string, node?: { __typename: 'AboutPage', id: string, heading?: string | null, bio_1?: string | null, bio_2?: string | null, core_skills?: Array<string | null> | null, tool_skills?: Array<string | null> | null, status_label?: string | null, status_sub?: string | null, location?: string | null, location_sub?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, social_links?: Array<{ __typename: 'AboutPageSocial_links', label?: string | null, url?: string | null } | null> | null } | null } | null> | null } };
+export type AboutPageConnectionQuery = { __typename?: 'Query', aboutPageConnection: { __typename?: 'AboutPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutPageConnectionEdges', cursor: string, node?: { __typename: 'AboutPage', id: string, profile_image?: string | null, heading?: string | null, bio_1?: string | null, bio_2?: string | null, core_skills?: Array<string | null> | null, tool_skills?: Array<string | null> | null, status_label?: string | null, status_sub?: string | null, location?: string | null, location_sub?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, social_links?: Array<{ __typename: 'AboutPageSocial_links', label?: string | null, url?: string | null } | null> | null } | null } | null> | null } };
 
 export type ContactPageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -922,6 +925,7 @@ export const HomePagePartsFragmentDoc = gql`
 export const AboutPagePartsFragmentDoc = gql`
     fragment AboutPageParts on AboutPage {
   __typename
+  profile_image
   heading
   bio_1
   bio_2

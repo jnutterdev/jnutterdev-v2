@@ -17,6 +17,7 @@ fragment HomePageParts on HomePage {
 
 fragment AboutPageParts on AboutPage {
   __typename
+  profile_image
   heading
   bio_1
   bio_2

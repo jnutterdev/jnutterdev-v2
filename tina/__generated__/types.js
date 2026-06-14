@@ -26,6 +26,7 @@ export const HomePagePartsFragmentDoc = gql`
 export const AboutPagePartsFragmentDoc = gql`
     fragment AboutPageParts on AboutPage {
   __typename
+  profile_image
   heading
   bio_1
   bio_2

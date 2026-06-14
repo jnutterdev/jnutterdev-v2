@@ -8,7 +8,16 @@ import about from '../content/pages/about.json';
     <div class="wrap">
       <div class="article-header">
         <div class="article-header__meta">About</div>
-        <h1 class="article-header__title" style="white-space: pre-line">{about.heading}</h1>
+        <div class="article-header__title-row">
+          <h1 class="article-header__title" style="white-space: pre-line">{about.heading}</h1>
+          {about.profile_image && (
+            <img
+              src={about.profile_image}
+              alt="John Nutter"
+              class="profile-photo"
+            />
+          )}
+        </div>
       </div>
 
       <div class="about-grid">
