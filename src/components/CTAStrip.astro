@@ -1,25 +1,20 @@
 ---
+import site from '../content/pages/site.json';
 ---
 
 <div class="cta-strip">
   <div class="cta-strip__inner">
     <div>
       <div class="cta-label">[ Get in touch ]</div>
-      <h2 class="cta-heading">
-        Have a<br />
-        project?
-      </h2>
-      <p class="cta-sub">
-        Drop me a message about whatever you're building —
-        I'm always happy to talk through ideas or potential collaborations.
-      </p>
+      <h2 class="cta-heading" style="white-space: pre-line">{site.cta_heading}</h2>
+      <p class="cta-sub">{site.cta_sub}</p>
     </div>
     <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 14px;">
       <a href="/contact" class="btn btn--primary" style="font-size: 0.85rem; padding: 14px 32px;">
         Get in touch ↗
       </a>
       <span style="font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--cream-mid);">
-        john@jnutterdev.com
+        {site.cta_email}
       </span>
     </div>
   </div>

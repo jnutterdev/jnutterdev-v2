@@ -1,0 +1,15 @@
+{
+  "hero_label": "Full Stack Developer — Decatur, GA",
+  "hero_heading": "Building\nthings\nfor the\nweb.",
+  "hero_bio": "I write clean, maintainable code across the full stack — React interfaces, PHP backends, Astro-powered sites, and the CI/CD pipelines that keep everything running.",
+  "status_label": "Open to opportunities",
+  "status_sub": "Full-time & project work",
+  "location": "Decatur, GA",
+  "location_sub": "USA — EST / UTC−5",
+  "latest_project": "jnutterdev.com v2",
+  "latest_project_sub": "Astro + Tina CMS",
+  "stat_years": "5+",
+  "stat_skills_detail": "HTML / CSS / JS\nReact / PHP / Astro",
+  "stat_commits": "40+",
+  "stat_site_version": "v2"
+}

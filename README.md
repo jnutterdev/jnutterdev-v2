@@ -71,6 +71,7 @@ Output is generated in `dist/`.
 │   ├── components/           # Nav, Footer, CTAStrip
 │   ├── content/
 │   │   ├── blog/             # Blog post MDX files (managed by Tina)
+│   │   ├── pages/            # Static page content JSON files (managed by Tina)
 │   │   └── projects/         # Project MDX files (managed by Tina)
 │   ├── content.config.ts     # Content collection schemas (Astro 6)
 │   ├── layouts/              # BaseLayout wrapper
@@ -104,6 +105,9 @@ Content is managed via [Tina CMS](https://tina.io) and stored as Markdown/MDX fi
 
 - **Projects** — `src/content/projects/[slug].mdx`
 - **Blog posts** — `src/content/blog/[slug].mdx`
+- **Page content** — `src/content/pages/*.json` (Home Page, About Page, Contact Page, Site Settings)
+
+Page content includes hero copy, bio text, skills lists, social links, stats, and the CTA strip — all editable as singleton documents in Tina without touching any `.astro` files.
 
 To edit content locally, run `npm run tina:dev` and navigate to `/admin`.
 
