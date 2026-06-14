@@ -1,10 +1,10 @@
 ---
-title: "jnutterdev.com v2"
-description: "The redesigned portfolio — Astro for full static output, Tina CMS for git-backed editorial control, deployed via GitHub Actions rsync to a self-hosted VPS. Zero JS on load."
+title: "jnutter.dev v2"
+description: "The redesigned portfolio — Astro for full static output, Tina CMS for git-backed editorial control, deployed via GitHub Actions to Cloudflare Pages. JS only where needed."
 tech: ["Astro", "Tina CMS", "CSS", "CI/CD"]
 status: "active"
 github_url: "https://github.com/jnutterdev/jnutterdev-v2"
-live_url: "https://jnutterdev.com"
+live_url: "https://jnutter.dev"
 order: 1
 featured: true
 ---
@@ -12,6 +12,10 @@ featured: true
 ## Overview
 
 Full rebuild of my personal portfolio using Astro's static output mode and Tina CMS for visual editing. The goal was a zero-client-JS experience with a solid content editing workflow that doesn't require touching code for routine updates.
+
+## Design
+
+Built around a dark, typographically intentional design system — near-black background, high-contrast foreground, with accent colors used sparingly. Type is set in Calibri with monospace details for metadata and UI elements. The sidebar card layout on the homepage keeps key info scannable without cluttering the hero.
 
 ## Stack decisions
 
@@ -23,7 +27,7 @@ Full rebuild of my personal portfolio using Astro's static output mode and Tina 
 
 ## Deployment
 
-Push to `main` → GitHub Actions builds (`npm run build`) → rsync to VPS over SSH. Tina edits trigger the same pipeline automatically via the same commit hook.
+Push to `main` → GitHub Actions builds (`npm run build`) → deploys to Cloudflare Pages. Tina edits trigger the same pipeline automatically via the same commit hook.
 
 ## Learnings
 

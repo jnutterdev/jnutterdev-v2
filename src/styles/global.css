@@ -3,27 +3,27 @@
 ============================================================ */
 :root {
   /* Core backgrounds */
-  --sage: #1a1b26;          /* main background */
-  --sage-dark: #1f2335;     /* alt / sidebar bg */
-  --sage-darker: #292e42;   /* line highlight */
-  --sage-darkest: #15161e;  /* deepest bg */
+  --sage: #1a1b26; /* main background */
+  --sage-dark: #1f2335; /* alt / sidebar bg */
+  --sage-darker: #292e42; /* line highlight */
+  --sage-darkest: #15161e; /* deepest bg */
 
   /* Accent (replaces cream — blue accent for interactive elements) */
-  --cream: #7aa2f7;         /* Terminal Blue */
-  --cream-dim: #6183bb;     /* dimmer blue */
+  --cream: #7aa2f7; /* Terminal Blue */
+  --cream-dim: #6183bb; /* dimmer blue */
 
   /* Text (inverted for dark theme) */
-  --text: #c0caf5;                       /* Foreground */
+  --text: #c0caf5; /* Foreground */
   --text-mid: rgba(192, 202, 245, 0.8);
   --text-faint: rgba(192, 202, 245, 0.55);
   --text-light: rgba(192, 202, 245, 0.6);
 
-  --cream-text: #c0caf5;                 /* Foreground for text on dark */
+  --cream-text: #c0caf5; /* Foreground for text on dark */
   --cream-mid: rgba(192, 202, 245, 0.65);
   --cream-faint: rgba(192, 202, 245, 0.3);
 
   /* Borders */
-  --border: rgba(59, 66, 97, 0.9);       /* Border / Subtle */
+  --border: rgba(59, 66, 97, 0.9); /* Border / Subtle */
   --border-cream: rgba(192, 202, 245, 0.18);
 
   /* Glow (blue instead of orange) */
@@ -163,16 +163,30 @@ img {
 .nav__links a:hover,
 .nav__links a.active {
   color: var(--tn-blue);
-  background:
-    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(122, 162, 247, 0.14) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 80% at 100% 100%, rgba(187, 154, 247, 0.06) 0%, transparent 50%),
+  background: radial-gradient(
+      ellipse 100% 100% at 0% 0%,
+      rgba(122, 162, 247, 0.14) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 80% 80% at 100% 100%,
+      rgba(187, 154, 247, 0.06) 0%,
+      transparent 50%
+    ),
     rgba(122, 162, 247, 0.07);
 }
 
 .nav__links a.active {
-  background:
-    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(122, 162, 247, 0.2) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 80% at 100% 100%, rgba(187, 154, 247, 0.08) 0%, transparent 50%),
+  background: radial-gradient(
+      ellipse 100% 100% at 0% 0%,
+      rgba(122, 162, 247, 0.2) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 80% 80% at 100% 100%,
+      rgba(187, 154, 247, 0.08) 0%,
+      transparent 50%
+    ),
     rgba(122, 162, 247, 0.1);
 }
 
@@ -261,16 +275,30 @@ img {
 .nav__mobile a:hover,
 .nav__mobile a.active {
   color: var(--tn-blue);
-  background:
-    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(122, 162, 247, 0.14) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 80% at 100% 100%, rgba(187, 154, 247, 0.06) 0%, transparent 50%),
+  background: radial-gradient(
+      ellipse 100% 100% at 0% 0%,
+      rgba(122, 162, 247, 0.14) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 80% 80% at 100% 100%,
+      rgba(187, 154, 247, 0.06) 0%,
+      transparent 50%
+    ),
     rgba(122, 162, 247, 0.07);
 }
 
 .nav__mobile a.active {
-  background:
-    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(122, 162, 247, 0.2) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 80% at 100% 100%, rgba(187, 154, 247, 0.08) 0%, transparent 50%),
+  background: radial-gradient(
+      ellipse 100% 100% at 0% 0%,
+      rgba(122, 162, 247, 0.2) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 80% 80% at 100% 100%,
+      rgba(187, 154, 247, 0.08) 0%,
+      transparent 50%
+    ),
     rgba(122, 162, 247, 0.1);
 }
 
@@ -338,7 +366,11 @@ img {
   width: clamp(260px, 30vw, 480px);
   height: clamp(260px, 30vw, 480px);
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, var(--tn-magenta) 0%, var(--tn-blue) 100%);
+  background: radial-gradient(
+    ellipse at center,
+    var(--tn-magenta) 0%,
+    var(--tn-blue) 100%
+  );
   opacity: 0.07;
   pointer-events: none;
   z-index: 0;
@@ -545,18 +577,32 @@ img {
 }
 
 .btn--primary {
-  background:
-    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(122, 162, 247, 0.4) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 80% at 100% 100%, rgba(187, 154, 247, 0.14) 0%, transparent 55%),
+  background: radial-gradient(
+      ellipse 100% 100% at 0% 0%,
+      rgba(122, 162, 247, 0.4) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 80% 80% at 100% 100%,
+      rgba(187, 154, 247, 0.14) 0%,
+      transparent 55%
+    ),
     rgba(122, 162, 247, 0.12);
   color: var(--text);
   border-color: rgba(122, 162, 247, 0.4);
 }
 
 .btn--primary:hover {
-  background:
-    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(122, 162, 247, 0.55) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 80% at 100% 100%, rgba(187, 154, 247, 0.2) 0%, transparent 55%),
+  background: radial-gradient(
+      ellipse 100% 100% at 0% 0%,
+      rgba(122, 162, 247, 0.55) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 80% 80% at 100% 100%,
+      rgba(187, 154, 247, 0.2) 0%,
+      transparent 55%
+    ),
     rgba(122, 162, 247, 0.2);
   border-color: rgba(122, 162, 247, 0.6);
 }
@@ -568,9 +614,16 @@ img {
 }
 
 .btn--ghost:hover {
-  background:
-    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(122, 162, 247, 0.12) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 80% at 100% 100%, rgba(187, 154, 247, 0.06) 0%, transparent 50%),
+  background: radial-gradient(
+      ellipse 100% 100% at 0% 0%,
+      rgba(122, 162, 247, 0.12) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 80% 80% at 100% 100%,
+      rgba(187, 154, 247, 0.06) 0%,
+      transparent 50%
+    ),
     rgba(192, 202, 245, 0.06);
   border-color: rgba(122, 162, 247, 0.35);
 }
@@ -650,9 +703,16 @@ img {
 }
 
 .project-card {
-  background:
-    radial-gradient(ellipse 110% 130% at 105% 110%, rgba(122, 162, 247, 0) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 50% at 0% 0%, rgba(187, 154, 247, 0) 0%, transparent 55%),
+  background: radial-gradient(
+      ellipse 110% 130% at 105% 110%,
+      rgba(122, 162, 247, 0) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 40% 50% at 0% 0%,
+      rgba(187, 154, 247, 0) 0%,
+      transparent 55%
+    ),
     rgba(192, 202, 245, 0.03);
   border-radius: 16px;
   border: 1px solid var(--border);
@@ -664,9 +724,16 @@ img {
 }
 
 .project-card:hover {
-  background:
-    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(122, 162, 247, 0.1) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 80% at 100% 100%, rgba(187, 154, 247, 0.06) 0%, transparent 50%),
+  background: radial-gradient(
+      ellipse 100% 100% at 0% 0%,
+      rgba(122, 162, 247, 0.1) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 80% 80% at 100% 100%,
+      rgba(187, 154, 247, 0.06) 0%,
+      transparent 50%
+    ),
     rgba(192, 202, 245, 0.05);
   transform: translateY(-2px);
 }
@@ -863,9 +930,16 @@ img {
 }
 
 .post-row:hover {
-  background:
-    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(122, 162, 247, 0.1) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 80% at 100% 100%, rgba(187, 154, 247, 0.06) 0%, transparent 50%),
+  background: radial-gradient(
+      ellipse 100% 100% at 0% 0%,
+      rgba(122, 162, 247, 0.1) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 80% 80% at 100% 100%,
+      rgba(187, 154, 247, 0.06) 0%,
+      transparent 50%
+    ),
     rgba(192, 202, 245, 0.05);
 }
 .post-row:hover .post-row__title {
@@ -917,7 +991,6 @@ img {
 .aside-block {
   margin-bottom: 28px;
   padding-bottom: 28px;
-  border-bottom: 1px solid var(--border);
 }
 
 .aside-block:last-child {
@@ -1025,8 +1098,11 @@ img {
 }
 
 .cta-strip .btn--primary {
-  background:
-    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(255, 255, 255, 0.2) 0%, transparent 55%),
+  background: radial-gradient(
+      ellipse 100% 100% at 0% 0%,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 55%
+    ),
     #7aa2f7;
   color: #15161e;
   border-color: #7aa2f7;
@@ -1034,8 +1110,11 @@ img {
 }
 
 .cta-strip .btn--primary:hover {
-  background:
-    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(255, 255, 255, 0.28) 0%, transparent 55%),
+  background: radial-gradient(
+      ellipse 100% 100% at 0% 0%,
+      rgba(255, 255, 255, 0.28) 0%,
+      transparent 55%
+    ),
     #8aafe8;
   border-color: #8aafe8;
 }
@@ -1044,11 +1123,7 @@ img {
    FOOTER
 ============================================================ */
 .footer {
-  background: linear-gradient(
-    to bottom,
-    #1f2335 0%,
-    #15161e 100%
-  );
+  background: linear-gradient(to bottom, #1f2335 0%, #15161e 100%);
   border-top: 1px solid var(--border);
   padding-block: 40px;
 }
@@ -1112,9 +1187,16 @@ img {
 
 .footer__social a:hover {
   color: var(--tn-blue);
-  background:
-    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(122, 162, 247, 0.14) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 80% at 100% 100%, rgba(187, 154, 247, 0.06) 0%, transparent 50%),
+  background: radial-gradient(
+      ellipse 100% 100% at 0% 0%,
+      rgba(122, 162, 247, 0.14) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 80% 80% at 100% 100%,
+      rgba(187, 154, 247, 0.06) 0%,
+      transparent 50%
+    ),
     rgba(122, 162, 247, 0.07);
 }
 
@@ -1385,9 +1467,16 @@ img {
 }
 .social-link:hover {
   color: var(--tn-blue);
-  background:
-    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(122, 162, 247, 0.1) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 80% at 100% 100%, rgba(187, 154, 247, 0.06) 0%, transparent 50%),
+  background: radial-gradient(
+      ellipse 100% 100% at 0% 0%,
+      rgba(122, 162, 247, 0.1) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 80% 80% at 100% 100%,
+      rgba(187, 154, 247, 0.06) 0%,
+      transparent 50%
+    ),
     rgba(192, 202, 245, 0.05);
 }
 .social-link::after {
