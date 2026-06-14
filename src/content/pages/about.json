@@ -1,0 +1,17 @@
+{
+  "heading": "Building for\nthe web,\nfor real.",
+  "bio_1": "I'm John Nutter, a full stack developer based in Decatur, GA. I work across the full stack — React interfaces, PHP backends, Astro-powered static sites, and the CI/CD pipelines that keep everything running.",
+  "bio_2": "Most of my work sits at the intersection of developer tooling and editorial content systems. I care about maintainability: code that a team can work in six months from now, content systems that editors can actually use, and deploy pipelines that fail loudly and recover cleanly.",
+  "core_skills": ["HTML", "CSS", "JavaScript", "React", "PHP", "Astro", "Python"],
+  "tool_skills": ["Tina CMS", "Contentful", "GitHub", "GitHub Actions", "Jira", "Confluence", "AI Prompting"],
+  "status_label": "Open to opportunities",
+  "status_sub": "Full-time & project work",
+  "location": "Decatur, GA",
+  "location_sub": "USA — EST / UTC−5",
+  "social_links": [
+    { "label": "GitHub", "url": "https://github.com/jnutterdev" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/jnutterdev" },
+    { "label": "Mastodon", "url": "https://mastodon.social/@jnutterdev" },
+    { "label": "Bluesky", "url": "https://bsky.app/profile/jndev.bsky.social" }
+  ]
+}

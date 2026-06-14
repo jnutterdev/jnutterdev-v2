@@ -17,6 +17,96 @@ var config_default = defineConfig({
   schema: {
     collections: [
       {
+        name: "homePage",
+        label: "Home Page",
+        path: "src/content/pages",
+        match: { include: "home" },
+        format: "json",
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          { type: "string", name: "hero_label", label: "Hero Label" },
+          { type: "string", name: "hero_heading", label: "Hero Heading", ui: { component: "textarea" } },
+          { type: "string", name: "hero_bio", label: "Hero Bio", ui: { component: "textarea" } },
+          { type: "string", name: "status_label", label: "Status Label" },
+          { type: "string", name: "status_sub", label: "Status Sub-text" },
+          { type: "string", name: "location", label: "Location" },
+          { type: "string", name: "location_sub", label: "Location Sub-text" },
+          { type: "string", name: "latest_project", label: "Latest Project" },
+          { type: "string", name: "latest_project_sub", label: "Latest Project Sub-text" },
+          { type: "string", name: "stat_years", label: "Years Experience (stat)" },
+          { type: "string", name: "stat_skills_detail", label: "Skills Detail", ui: { component: "textarea" } },
+          { type: "string", name: "stat_commits", label: "Commits This Month (stat)" },
+          { type: "string", name: "stat_site_version", label: "Site Version (stat)" }
+        ]
+      },
+      {
+        name: "aboutPage",
+        label: "About Page",
+        path: "src/content/pages",
+        match: { include: "about" },
+        format: "json",
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          { type: "string", name: "heading", label: "Heading", ui: { component: "textarea" } },
+          { type: "string", name: "bio_1", label: "Bio Paragraph 1", ui: { component: "textarea" } },
+          { type: "string", name: "bio_2", label: "Bio Paragraph 2", ui: { component: "textarea" } },
+          { type: "string", name: "core_skills", label: "Core Skills", list: true },
+          { type: "string", name: "tool_skills", label: "Tools & Platforms", list: true },
+          { type: "string", name: "status_label", label: "Status Label" },
+          { type: "string", name: "status_sub", label: "Status Sub-text" },
+          { type: "string", name: "location", label: "Location" },
+          { type: "string", name: "location_sub", label: "Location Sub-text" },
+          {
+            type: "object",
+            name: "social_links",
+            label: "Social Links",
+            list: true,
+            fields: [
+              { type: "string", name: "label", label: "Label" },
+              { type: "string", name: "url", label: "URL" }
+            ]
+          }
+        ]
+      },
+      {
+        name: "contactPage",
+        label: "Contact Page",
+        path: "src/content/pages",
+        match: { include: "contact" },
+        format: "json",
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          { type: "string", name: "heading", label: "Heading", ui: { component: "textarea" } },
+          { type: "string", name: "email", label: "Email Address" },
+          { type: "string", name: "formspree_id", label: "Formspree Form ID" },
+          { type: "string", name: "status_label", label: "Status Label" },
+          { type: "string", name: "status_sub", label: "Status Sub-text" },
+          {
+            type: "object",
+            name: "social_links",
+            label: "Social Links",
+            list: true,
+            fields: [
+              { type: "string", name: "label", label: "Label" },
+              { type: "string", name: "url", label: "URL" }
+            ]
+          }
+        ]
+      },
+      {
+        name: "siteSettings",
+        label: "Site Settings",
+        path: "src/content/pages",
+        match: { include: "site" },
+        format: "json",
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          { type: "string", name: "cta_heading", label: "CTA Heading", ui: { component: "textarea" } },
+          { type: "string", name: "cta_sub", label: "CTA Sub-text", ui: { component: "textarea" } },
+          { type: "string", name: "cta_email", label: "CTA Email" }
+        ]
+      },
+      {
         name: "project",
         label: "Projects",
         path: "src/content/projects",

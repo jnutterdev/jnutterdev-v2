@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import home from '../content/pages/home.json';
 
 const allProjects = await getCollection('projects');
 const projects = allProjects
@@ -29,18 +30,9 @@ function fmtDate(d: Date) {
     <div class="hero__content">
       <div class="hero__wrap">
         <div>
-          <div class="hero__label">Full Stack Developer — Decatur, GA</div>
-          <h1 class="hero__heading">
-            Building<br />
-            things<br />
-            for the<br />
-            web.
-          </h1>
-          <p class="hero__bio">
-            I write clean, maintainable code across the full stack —
-            React interfaces, PHP backends, Astro-powered sites,
-            and the CI/CD pipelines that keep everything running.
-          </p>
+          <div class="hero__label">{home.hero_label}</div>
+          <h1 class="hero__heading" style="white-space: pre-line">{home.hero_heading}</h1>
+          <p class="hero__bio">{home.hero_bio}</p>
           <div class="hero__actions">
             <a href="/projects" class="btn btn--primary">View my work</a>
             <a href="/about" class="btn btn--ghost">About me</a>
@@ -50,8 +42,8 @@ function fmtDate(d: Date) {
         <div class="hero__aside">
           <div class="data-panel data-panel--status">
             <div class="data-panel__label">Status</div>
-            <div class="data-panel__value">Open to opportunities</div>
-            <div class="data-panel__sub">Full-time &amp; project work</div>
+            <div class="data-panel__value">{home.status_label}</div>
+            <div class="data-panel__sub">{home.status_sub}</div>
           </div>
           <div class="data-panel">
             <div class="data-panel__label">Projects</div>
@@ -63,13 +55,13 @@ function fmtDate(d: Date) {
           </div>
           <div class="data-panel">
             <div class="data-panel__label">Location</div>
-            <div class="data-panel__value">Decatur, GA</div>
-            <div class="data-panel__sub">USA — EST / UTC−5</div>
+            <div class="data-panel__value">{home.location}</div>
+            <div class="data-panel__sub">{home.location_sub}</div>
           </div>
           <div class="data-panel">
             <div class="data-panel__label">Latest</div>
-            <div class="data-panel__value" style="font-size: 0.9rem;">jnutterdev.com v2</div>
-            <div class="data-panel__sub">Astro + Tina CMS</div>
+            <div class="data-panel__value" style="font-size: 0.9rem;">{home.latest_project}</div>
+            <div class="data-panel__sub">{home.latest_project_sub}</div>
           </div>
         </div>
       </div>
@@ -78,12 +70,9 @@ function fmtDate(d: Date) {
     <div class="data-row">
       <div class="data-row__wrap">
         <div class="data-row__item">
-          <div class="data-row__num">5+</div>
+          <div class="data-row__num">{home.stat_years}</div>
           <div class="data-row__title">Years Experience</div>
-          <div class="data-row__detail">
-            HTML / CSS / JS<br />
-            React / PHP / Astro
-          </div>
+          <div class="data-row__detail" style="white-space: pre-line">{home.stat_skills_detail}</div>
         </div>
         <div class="data-row__item">
           <div class="data-row__num">{allProjects.length}</div>
@@ -94,7 +83,7 @@ function fmtDate(d: Date) {
           </div>
         </div>
         <div class="data-row__item">
-          <div class="data-row__num">40+</div>
+          <div class="data-row__num">{home.stat_commits}</div>
           <div class="data-row__title">Commits This Month</div>
           <div class="data-row__detail">
             Active dev across<br />
@@ -102,7 +91,7 @@ function fmtDate(d: Date) {
           </div>
         </div>
         <div class="data-row__item">
-          <div class="data-row__num">v2</div>
+          <div class="data-row__num">{home.stat_site_version}</div>
           <div class="data-row__title">Site Version</div>
           <div class="data-row__detail">
             Astro + Tina CMS<br />

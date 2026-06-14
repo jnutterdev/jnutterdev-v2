@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import contact from '../content/pages/contact.json';
 ---
 
 <BaseLayout
@@ -11,18 +12,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="wrap">
       <div class="article-header">
         <div class="article-header__meta">Contact</div>
-        <h1 class="article-header__title">
-          Let's talk<br />
-          about your<br />
-          project.
-        </h1>
+        <h1 class="article-header__title" style="white-space: pre-line">{contact.heading}</h1>
       </div>
 
       <div class="contact-grid">
-        <!-- Replace YOUR_FORM_ID with your Formspree form ID -->
         <form
           class="contact-form"
-          action="https://formspree.io/f/YOUR_FORM_ID"
+          action={`https://formspree.io/f/${contact.formspree_id}`}
           method="POST"
         >
           <div class="form-group">
@@ -64,23 +60,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="aside-block">
             <div class="aside-block__label">Email</div>
             <div class="aside-readout">
-              <span>john@jnutterdev.com</span>
+              <span>{contact.email}</span>
             </div>
           </div>
           <div class="aside-block">
             <div class="aside-block__label">Status</div>
             <div class="aside-readout">
-              <span>Open to opportunities</span><br />
-              Full-time &amp; project work
+              <span>{contact.status_label}</span><br />
+              {contact.status_sub}
             </div>
           </div>
           <div class="aside-block">
             <div class="aside-block__label">Links</div>
             <div class="social-links">
-              <a href="https://github.com/jnutterdev" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-              <a href="https://www.linkedin.com/in/jnutterdev" class="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <a href="https://mastodon.social/@jnutterdev" class="social-link" target="_blank" rel="noopener noreferrer">Mastodon</a>
-              <a href="https://bsky.app/profile/jndev.bsky.social" class="social-link" target="_blank" rel="noopener noreferrer">Bluesky</a>
+              {contact.social_links.map(link => (
+                <a href={link.url} class="social-link" target="_blank" rel="noopener noreferrer">{link.label}</a>
+              ))}
             </div>
           </div>
         </aside>

@@ -1,3 +1,59 @@
+fragment HomePageParts on HomePage {
+  __typename
+  hero_label
+  hero_heading
+  hero_bio
+  status_label
+  status_sub
+  location
+  location_sub
+  latest_project
+  latest_project_sub
+  stat_years
+  stat_skills_detail
+  stat_commits
+  stat_site_version
+}
+
+fragment AboutPageParts on AboutPage {
+  __typename
+  heading
+  bio_1
+  bio_2
+  core_skills
+  tool_skills
+  status_label
+  status_sub
+  location
+  location_sub
+  social_links {
+    __typename
+    label
+    url
+  }
+}
+
+fragment ContactPageParts on ContactPage {
+  __typename
+  heading
+  email
+  formspree_id
+  status_label
+  status_sub
+  social_links {
+    __typename
+    label
+    url
+  }
+}
+
+fragment SiteSettingsParts on SiteSettings {
+  __typename
+  cta_heading
+  cta_sub
+  cta_email
+}
+
 fragment ProjectParts on Project {
   __typename
   title
