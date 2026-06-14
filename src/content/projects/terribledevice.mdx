@@ -1,0 +1,27 @@
+---
+title: "terribledevice.com"
+description: "Cyberpunk culture review site with a custom panel-based layout, five-dimension scoring rubric, and a fully custom design system. Built in Astro + TinaCMS, deployed to Cloudflare Pages."
+tech: ["Astro", "Tina CMS", "CSS", "CI/CD"]
+status: "active"
+live_url: "https://terribledevice.com"
+order: 3
+featured: false
+---
+
+## Overview
+
+A review site covering cyberpunk culture across music, film, games, and literature. The editorial focus is on the genre across any era — not just the classics. Reviews use a five-dimension scoring rubric built specifically for the site: Signal (Production & Sound Design), Architecture (Composition & Structure), Current (Energy & Drive), Atmosphere (World & Mood), and Signal-to-Noise (Originality & Distinction), with half-point scoring and a separate editorial overall score.
+
+## Design
+
+Near-black background with hot pink, warm sand, and steel blue accents. Typography uses Barlow Condensed for display, Barlow for body, and Share Tech Mono for metadata and UI. The layout uses clip-path notched cards and a panel-based grid that gives the site a tactile, zine-like quality. Hero image panels pull a thematically relevant quote from a curated collection at build time based on the featured review's tags.
+
+## Stack decisions
+
+**Astro** for static output with content collections for reviews, quotes, and editorial content. **Tina CMS** handles visual editing over MDX — same git-backed approach as my other sites, no database required.
+
+**Scoped CSS with custom properties** — the design system is fully token-driven, making it straightforward to maintain consistency across review types and page templates.
+
+## Deployment
+
+Push to `main` → GitHub Actions builds and deploys to Cloudflare Pages. Tina edits trigger the same pipeline via commit hook.

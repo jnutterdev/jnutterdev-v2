@@ -1,0 +1,27 @@
+---
+title: "longlostforgotten.com"
+description: "Personal blog with a retro-futurist terminal aesthetic — built in Astro + TinaCMS with a fully custom design system. Deployed via GitHub Actions to Cloudflare Pages."
+tech: ["Astro", "Tina CMS", "CSS", "CI/CD"]
+status: "active"
+live_url: "https://longlostforgotten.com"
+order: 2
+featured: false
+---
+
+## Overview
+
+Personal blog and social handle home base. The goal was a site that felt like intercepted signal from a near-future terminal — not a theme, but a fully custom design system built from scratch with a specific aesthetic in mind.
+
+## Design
+
+The palette is built around hot pink, teal, sand, and near-black — high contrast with a warm undertone. Typography uses Barlow Condensed for headlines, Josefin Sans for body and UI, and Share Tech Mono for metadata. Layered texture effects — scanlines, noise overlay, SVG deco geometry, signal bars, and corner marks — give the page a worn, broadcast aesthetic without feeling overdone.
+
+## Stack decisions
+
+**Astro** handles static output with content collections for posts. **Tina CMS** provides git-backed visual editing over the same MDX files, keeping content versioned without a database.
+
+**Scoped CSS with custom properties** — no framework, no utility classes. Every design token is a CSS variable, making the system easy to maintain and extend.
+
+## Deployment
+
+Push to `main` → GitHub Actions builds and deploys to Cloudflare Pages. Tina edits trigger the same pipeline via commit hook.

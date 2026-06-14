@@ -1,0 +1,31 @@
+---
+title: "reader.ashtephra.com"
+description: "Personal RSS reader built entirely on Cloudflare's serverless stack — Astro SSR, D1 for storage, Workers cron for feed fetching, and Cloudflare Access for zero-trust auth."
+tech: ["Astro", "Cloudflare", "TypeScript", "D1"]
+status: "active"
+live_url: "https://reader.ashtephra.com"
+order: 4
+featured: false
+---
+
+## Overview
+
+A personal RSS reader built as an exercise in going fully serverless on Cloudflare's infrastructure. The goal was a clean, fast reading experience with no third-party services — everything runs at the edge.
+
+## Stack decisions
+
+**Astro SSR** with the Cloudflare adapter handles server-side rendering at the edge. No origin server required.
+
+**Cloudflare D1** (SQLite at the edge) stores feeds, entries, and read state. Lightweight and fast with no cold start penalty.
+
+**Workers cron** triggers feed fetching on a schedule — polling registered feeds, parsing entries, and writing new content to D1 without any always-on server.
+
+**Cloudflare Access (Zero Trust)** handles authentication. No login system to build or maintain — access is gated at the network level before the app ever sees the request.
+
+## Design
+
+Clean reading-focused UI — Syne for headings, Lora for body text, DM Mono for UI elements. Orange, dark, and cream palette. Three-panel desktop layout with a mobile swipe-panel view for smaller screens.
+
+## Deployment
+
+Deployed directly to Cloudflare Pages with the Workers and D1 bindings configured via `wrangler.toml`. No separate CI step required — Cloudflare handles the build and edge deployment pipeline.
