@@ -2,7 +2,7 @@
 
 Personal portfolio and developer site for John Nutter — full stack developer based in Decatur, GA. Built with Astro and Tina CMS, deployed to Cloudflare Workers via GitHub Actions.
 
-The design uses a signage-inspired editorial aesthetic: muted sage green, large cream letterform, near-black type, and a wayfinding-style data grid in the hero. Reference mockup is in `mockup-sage/`.
+The design uses a signage-inspired editorial aesthetic with the Tokyo Night color palette: dark navy backgrounds, blue (`#7aa2f7`) and magenta (`#bb9af7`) accents, and a wayfinding-style data grid in the hero.
 
 ---
 
