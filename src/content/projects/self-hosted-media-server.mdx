@@ -1,0 +1,25 @@
+---
+title: "Self-Hosted Media Server"
+description: "Jellyfin running on a home Ubuntu server, accessible remotely via Cloudflare Tunnel. No open ports — zero-trust network access with automatic SSL handled at the edge."
+tech: ["Cloudflare", "Linux", "Jellyfin", "Ubuntu"]
+status: "active"
+live_url: "https://media.ashtephra.com"
+order: 5
+featured: false
+---
+
+## Overview
+
+A self-hosted media server running Jellyfin on a home Ubuntu machine, exposed to the internet securely via Cloudflare Tunnel. The setup prioritizes security — no ports are opened on the home network, and all traffic routes through Cloudflare's edge with automatic SSL termination.
+
+## Stack decisions
+
+**Jellyfin** is the open-source media server — handles library management, transcoding, and client streaming across devices. Finamp on iOS is the primary client for music playback.
+
+**Cloudflare Tunnel** creates an outbound-only connection from the home server to Cloudflare's edge. No inbound firewall rules, no exposed ports, no dynamic DNS required. The tunnel handles routing and SSL automatically.
+
+**Cloudflare Access** sits in front of the tunnel, providing zero-trust authentication before any request reaches the server.
+
+## Learnings
+
+Running a home server through Cloudflare Tunnel is a cleaner security model than traditional port forwarding — the attack surface is essentially zero since nothing is listening for inbound connections. The tradeoff is that Cloudflare's ToS restricts large media streaming through tunnels, so this setup works best for personal use at low traffic volumes.
