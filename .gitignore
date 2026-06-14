@@ -42,7 +42,7 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Tina CMS
-.tina/__generated__/
+tina/__generated__/
 
 # Misc
 *.tgz
