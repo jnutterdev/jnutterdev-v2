@@ -14,7 +14,7 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 ---
 
-<BaseLayout title={`${project.data.title} — jnutterdev`} description={project.data.description}>
+<BaseLayout title={`${project.data.title} — jnutterdev`} description={project.data.description} ogImage={project.data.thumbnail}>
   <div class="wrap">
     <div class="article-header">
       <a href="/projects" class="article-header__back">Projects</a>

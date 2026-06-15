@@ -23,6 +23,7 @@ const blog = defineCollection({
     date: z.date(),
     excerpt: z.string(),
     tags: z.array(z.string()),
+    // Recommended: 1200×630px JPEG, used as the social share image (og:image)
     cover_image: z.string().optional(),
   }),
 });
