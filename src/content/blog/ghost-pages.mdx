@@ -2,6 +2,7 @@
 title: Ghost pages
 date: 2019-09-10
 excerpt: Hunting down why my Jekyll site was showing blank tiles — the culprit turned out to be a subtle logic bug in the theme's conditional block.
+draft: false
 tags: ["jekyll", "debugging"]
 ---
 
@@ -26,6 +27,6 @@ for post in site.posts limit:site.tiles-count
   if site.tiles-source == 'posts' and post.show_tile != false
 ```
 
-It seems like this should do the trick if the `show_tile` frontmatter was not set as `false`, but that's not the case here for some reason. So I changed the logic to only look at `true`. Hit refresh on the webpage, and *BOOM*, it worked. I can now see the correct tiles display on the index page. What a relief. Who knew it was just an issue with the logic.
+It seems like this should do the trick if the `show_tile` frontmatter was not set as `false`, but that's not the case here for some reason. So I changed the logic to only look at `true`. Hit refresh on the webpage, and _BOOM_, it worked. I can now see the correct tiles display on the index page. What a relief. Who knew it was just an issue with the logic.
 
 The next update I want to make is adding some additional images/icons to the website, but I haven't exactly decided how I want to do that and what images those will be.
