@@ -124,6 +124,7 @@ export default defineConfig({
             required: true,
             ui: { component: 'textarea' },
           },
+          { type: 'boolean', name: 'draft', label: 'Draft' },
           { type: 'string', name: 'tech', label: 'Tech Stack', list: true },
           {
             type: 'string',
@@ -157,6 +158,7 @@ export default defineConfig({
             required: true,
             ui: { component: 'textarea' },
           },
+          { type: 'boolean', name: 'draft', label: 'Draft' },
           { type: 'string', name: 'tags', label: 'Tags', list: true },
           { type: 'image', name: 'cover_image', label: 'Cover Image' },
           { type: 'rich-text', name: 'body', label: 'Content', isBody: true },

@@ -6,8 +6,9 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    tech: z.array(z.string()),
-    status: z.enum(['active', 'archived', 'draft']),
+    draft: z.boolean().default(false),
+    tech: z.array(z.string()).default([]),
+    status: z.enum(['active', 'archived', 'draft']).optional(),
     github_url: z.string().optional(),
     live_url: z.string().optional(),
     thumbnail: z.string().optional(),
@@ -22,6 +23,7 @@ const blog = defineCollection({
     title: z.string(),
     date: z.date(),
     excerpt: z.string(),
+    draft: z.boolean().default(false),
     tags: z.array(z.string()),
     // Recommended: 1200×630px JPEG, used as the social share image (og:image)
     cover_image: z.string().optional(),
