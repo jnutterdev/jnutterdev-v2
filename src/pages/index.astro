@@ -5,7 +5,7 @@ import home from '../content/pages/home.json';
 
 const allProjects = await getCollection('projects');
 const projects = allProjects
-  .sort((a, b) => a.data.order - b.data.order)
+  .sort((a, b) => b.data.order - a.data.order)
   .slice(0, 5);
 
 const allPosts = await getCollection('blog');
@@ -85,9 +85,9 @@ function fmtDate(d: Date) {
       </div>
 
       <div class="projects-grid">
-        {projects.map((project, i) => {
+        {projects.map((project) => {
           const isFeatured = project.data.featured;
-          const cardNum = String(i + 1).padStart(3, '0');
+          const cardNum = String(project.data.order).padStart(3, '0');
           return (
             <article class={`project-card${isFeatured ? ' project-card--large' : ''}`}>
               <div class="project-card__index">
