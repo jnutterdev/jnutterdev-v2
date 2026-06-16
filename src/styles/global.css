@@ -1377,7 +1377,6 @@ img {
 
 .prose a {
   color: var(--tn-blue);
-  border-bottom: 1px solid rgba(122, 162, 247, 0.3);
   transition: border-color 0.15s;
 }
 
