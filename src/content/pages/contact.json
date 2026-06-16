@@ -1,7 +1,7 @@
 {
   "heading": "Let's talk\nabout your\nproject.",
   "email": "hello@jnutter.dev",
-  "formspree_id": "YOUR_FORM_ID",
+  "formspree_id": "xvznljav",
   "status_label": "Open to opportunities",
   "status_sub": "Full-time & project work",
   "social_links": [
@@ -19,7 +19,7 @@
     },
     {
       "label": "Bluesky",
-      "url": "https://bsky.app/profile/jndev.bsky.social"
+      "url": "https://bsky.app/profile/jnutter.dev"
     }
   ]
 }
