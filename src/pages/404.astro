@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 — jnutterdev"
+  description="Page not found."
+  hideCTA
+>
+  <section class="section">
+    <div class="wrap">
+      <div class="article-header">
+        <div class="article-header__meta">404</div>
+        <h1 class="article-header__title">Page not found.</h1>
+      </div>
+
+      <div class="not-found-body">
+        <p>This page doesn't exist or may have moved.</p>
+        <a href="/" class="btn btn--primary">Back to home ↗</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found-body {
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .not-found-body p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted, currentColor);
+  }
+</style>

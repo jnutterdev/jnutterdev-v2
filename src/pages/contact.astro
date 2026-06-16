@@ -21,6 +21,7 @@ import contact from '../content/pages/contact.json';
           action={`https://formspree.io/f/${contact.formspree_id}`}
           method="POST"
         >
+          <input type="hidden" name="_next" value="https://jnutter.dev/thank-you" />
           <div class="form-group">
             <label class="form-label" for="name">Name</label>
             <input

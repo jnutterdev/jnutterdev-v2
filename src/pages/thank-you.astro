@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Message sent — jnutterdev"
+  description="Thanks for reaching out."
+  hideCTA
+>
+  <section class="section">
+    <div class="wrap">
+      <div class="article-header">
+        <div class="article-header__meta">Contact</div>
+        <h1 class="article-header__title">Message sent.</h1>
+      </div>
+
+      <div class="thankyou-body">
+        <p>Thanks for reaching out — I'll get back to you as soon as I can.</p>
+        <a href="/" class="btn btn--primary">Back to home ↗</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thankyou-body {
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .thankyou-body p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted, currentColor);
+  }
+</style>
