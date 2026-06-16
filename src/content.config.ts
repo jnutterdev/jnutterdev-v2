@@ -25,8 +25,9 @@ const blog = defineCollection({
     excerpt: z.string(),
     draft: z.boolean().default(false),
     tags: z.array(z.string()),
-    // Recommended: 1200×630px JPEG, used as the social share image (og:image)
     cover_image: z.string().optional(),
+    blueskyUrl: z.string().url().optional(),
+    mastodonUrl: z.string().url().optional(),
   }),
 });
 

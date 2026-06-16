@@ -166,26 +166,25 @@ async function main() {
     if (imageKey && !image) console.warn('Could not fetch post image, posting without it.');
 
     console.log(`Announcing: ${fm.title}`);
-    let discussionUrl = null;
+    let blueskyUrl = null;
+    let mastodonUrl = null;
 
     if (BLUESKY_HANDLE && BLUESKY_APP_PASSWORD) {
       try {
-        discussionUrl = await postToBluesky(text, postUrl, image);
-        console.log(`Bluesky: ${discussionUrl}`);
+        blueskyUrl = await postToBluesky(text, postUrl, image);
+        console.log(`Bluesky: ${blueskyUrl}`);
       } catch (err) { console.error('Bluesky error:', err.message); }
     }
 
     if (MASTODON_INSTANCE && MASTODON_ACCESS_TOKEN) {
       try {
-        const mastodonUrl = await postToMastodon(text, image);
+        mastodonUrl = await postToMastodon(text, image);
         console.log(`Mastodon: ${mastodonUrl}`);
-        if (!discussionUrl) discussionUrl = mastodonUrl;
       } catch (err) { console.error('Mastodon error:', err.message); }
     }
 
-    if (discussionUrl) {
-      updateFrontmatterField(filePath, 'discussionUrl', discussionUrl);
-    }
+    if (blueskyUrl) updateFrontmatterField(filePath, 'blueskyUrl', blueskyUrl);
+    if (mastodonUrl) updateFrontmatterField(filePath, 'mastodonUrl', mastodonUrl);
   }
 
   execSync('git config user.name "github-actions[bot]"');

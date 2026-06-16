@@ -161,6 +161,8 @@ export default defineConfig({
           { type: 'boolean', name: 'draft', label: 'Draft' },
           { type: 'string', name: 'tags', label: 'Tags', list: true },
           { type: 'image', name: 'cover_image', label: 'Cover Image' },
+          { type: 'string', name: 'blueskyUrl', label: 'Bluesky URL' },
+          { type: 'string', name: 'mastodonUrl', label: 'Mastodon URL' },
           { type: 'rich-text', name: 'body', label: 'Content', isBody: true },
         ],
       },

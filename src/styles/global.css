@@ -1027,6 +1027,47 @@ img {
   font-weight: 500;
 }
 
+.discussion-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.discussion-footer__label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.discussion-footer__links {
+  display: flex;
+  gap: 12px;
+}
+
+.discussion-footer__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.discussion-footer__link:hover {
+  text-decoration: underline;
+}
+
+.discussion-footer__link svg {
+  flex-shrink: 0;
+}
+
 /* ============================================================
    CTA STRIP
 ============================================================ */
