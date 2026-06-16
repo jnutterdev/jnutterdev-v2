@@ -1,0 +1,51 @@
+---
+title: Auto-Announcing Posts to Bluesky and Mastodon (and Closing the Loop)
+date: 2026-06-15T00:00:00.000Z
+excerpt: 'Instead of wiring up a comments system, I automated social announcements and let the discussion happen where it was already going to happen anyway.'
+draft: false
+tags:
+  - Devlog
+  - CI/CD
+  - Automation
+---
+
+The standard answer for discussion on a static site is: pick a third-party comments service, embed it, and accept the dependency. I didn't want to do that — not because it's wrong, but because the conversation was already going to happen on Bluesky and Mastodon anyway. I just wanted to link it back.
+
+So I built a script that does it automatically.
+
+## What it does
+
+When a new post merges to `main` and deploys, a GitHub Actions workflow fires. It runs `scripts/announce.mjs`, which:
+
+1. Checks `git diff` for newly added `.mdx` files in `src/content/blog/` and `src/content/projects/`
+2. Parses the frontmatter to get the title, excerpt, and image
+3. Posts to Bluesky and Mastodon — with the cover image attached if one exists
+4. Takes the social post URLs from the API responses
+5. Writes those URLs back into the file's frontmatter as `blueskyUrl` and `mastodonUrl`
+6. Commits and pushes the updated file
+
+On the post page, I check for those frontmatter fields and render discussion icon links at the bottom. If neither URL exists — old posts, drafts — the footer just doesn't show up.
+
+## The loop problem
+
+The commit-and-push at the end of the script triggers the Deploy workflow, which would trigger Announce again. Infinite loop.
+
+The fix is a single condition on the Announce workflow:
+
+```yaml
+if: |
+  github.event.workflow_run.conclusion == 'success' &&
+  github.event.workflow_run.actor.login != 'github-actions[bot]'
+```
+
+If the push came from the bot, skip. One pass only.
+
+## Why not a comments system
+
+There are solid options for this — giscus uses GitHub Discussions, utterances uses issues, Disqus is Disqus. They work. But they add a third-party embed to every page, and the discussion ends up in a widget that most readers never interact with through the site anyway.
+
+The social feed is where the conversation was already going to happen. This just makes that explicit — and links it back from the post so it's easy to find.
+
+## One edge to know about
+
+The script fetches the cover image from the live site before uploading it to each platform. That means there's a small window after deploy where the image might not be up yet. In practice the image has always been available by the time the announce step runs, but it's a soft dependency worth knowing about.
