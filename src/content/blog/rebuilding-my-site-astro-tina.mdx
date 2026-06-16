@@ -1,16 +1,21 @@
 ---
-title: "Rebuilding My Site with Astro & Tina CMS"
-date: 2026-06-01
-excerpt: "Full walkthrough of the v2 build — decisions, tradeoffs, and the deployment pipeline that actually worked."
+title: Rebuilding My Site with Astro & Tina CMS
+date: 2026-06-01T00:00:00.000Z
+excerpt: 'Full walkthrough of the v2 build — decisions, tradeoffs, and the deployment pipeline that actually worked.'
 draft: false
-tags: ["Devlog", "Astro", "Tina CMS"]
+tags:
+  - Devlog
+  - Astro
+  - Tina CMS
+blueskyUrl: 'https://bsky.app/profile/jnutter.dev/post/3moellnje6k2q'
+mastodonUrl: 'https://mastodon.social/@jnutterdev/116757056700331338'
 ---
 
 The v2 rebuild of this site has been on my list since I outgrew the previous setup. Here's what I built, why I made the choices I did, and what I'd do differently.
 
 ## Why Astro?
 
-I've built with Next.js and Gatsby before. Both are solid, but they ship more JavaScript than a portfolio site needs. Astro's default-zero-JS output is a genuinely different mental model — you opt _in_ to interactivity rather than opting out.
+I've built with Next.js and Gatsby before. Both are solid, but they ship more JavaScript than a portfolio site needs. Astro's default-zero-JS output is a genuinely different mental model — you opt *in* to interactivity rather than opting out.
 
 For a site that's mostly static content, and JS only where needed--that's the right default.
 
