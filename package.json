@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
+    "prepare": "cp scripts/hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
