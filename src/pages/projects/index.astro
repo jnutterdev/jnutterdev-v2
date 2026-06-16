@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 const allProjects = await getCollection('projects');
-const projects = allProjects.sort((a, b) => a.data.order - b.data.order);
+const projects = allProjects.sort((a, b) => b.data.order - a.data.order);
 
 const allTech = [...new Set(projects.flatMap(p => p.data.tech))].sort();
 ---
@@ -27,9 +27,9 @@ const allTech = [...new Set(projects.flatMap(p => p.data.tech))].sort();
       </div>
 
       <div class="projects-grid" id="projects-grid">
-        {projects.map((project, i) => {
+        {projects.map((project) => {
           const isFeatured = project.data.featured;
-          const cardNum = String(i + 1).padStart(3, '0');
+          const cardNum = String(project.data.order).padStart(3, '0');
           return (
             <article
               class={`project-card${isFeatured ? ' project-card--large' : ''}`}
