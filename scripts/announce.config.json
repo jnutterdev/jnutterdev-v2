@@ -1,0 +1,16 @@
+{
+  "contentTypes": [
+    {
+      "dir": "src/content/blog/",
+      "urlPath": "blog",
+      "excerptField": "excerpt",
+      "imageField": "cover_image"
+    },
+    {
+      "dir": "src/content/projects/",
+      "urlPath": "projects",
+      "excerptField": "description",
+      "imageField": "thumbnail"
+    }
+  ]
+}

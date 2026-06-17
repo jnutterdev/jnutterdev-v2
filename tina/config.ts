@@ -140,6 +140,8 @@ export default defineConfig({
           { type: 'image', name: 'thumbnail', label: 'Thumbnail' },
           { type: 'number', name: 'order', label: 'Sort Order' },
           { type: 'boolean', name: 'featured', label: 'Featured' },
+          { type: 'string', name: 'blueskyUrl', label: 'Bluesky URL' },
+          { type: 'string', name: 'mastodonUrl', label: 'Mastodon URL' },
           { type: 'rich-text', name: 'body', label: 'Content', isBody: true },
         ],
       },
