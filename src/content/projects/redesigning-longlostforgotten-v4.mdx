@@ -1,66 +1,18 @@
 ---
 title: Redesigning longlostforgotten v4
-description: 'This is the fourth version of [longlostforgotten.com](https://longlostforgotten.com). That number feels more embarrassing than it probably should, but here we are.'
-draft: true
+description: 'This is the fourth version of longlostforgotten.com. That number feels more embarrassing than it probably should, but here we are.'
+draft: false
+tech:
+  - Astro
+  - Tina CMS
 status: active
 github_url: 'https://github.com/jnutterdev/longlost-v4'
 live_url: 'https://longlostforgotten.com'
 thumbnail: /images/cover-1781743400920.png
+order: 9
 ---
 
-Rebuilding Long Lost Forgotten (v4)\*\*
-
-*or: how I stopped trying to be cool and just made a site I like*
-
-***
-
-This is the fourth version of [longlostforgotten.com](https://longlostforgotten.com). That number feels more embarrassing than it probably should, but here we are.
-
-The previous version — v3 — used the same core stack as this one. Astro, TinaCMS, Cloudflare Pages. Nothing wrong there. The problem was the design. It looked too close to [terribledevice.com](https://terribledevice.com), which also runs on Astro and has a fairly distinctive visual identity. And beyond just looking similar, v3 had this vaguely edgy, high-contrast thing going on that I kept looking at and thinking: *this isn't really me.* At some point it started to feel like a costume.
-
-So I decided to strip it back. Not a stack swap — just a reset on what the site actually looks like and feels like.
-
-**The Design Direction**
-
-I landed on [Catppuccin Mocha](https://catppuccin.com/) as the color palette. It's a warm dark theme with soft purples and lavenders that I've been using in my editors for a while now. It felt right for something personal — not harsh, not trying too hard. The whole thing is built on CSS custom properties mapped to the Catppuccin tokens, which made it easy to stay consistent across components.
-
-For type, I went with IBM Plex Mono and IBM Plex Sans, both pulled from Bunny Fonts. Mono handles all the UI chrome — nav links, dates, tags, section labels. Sans handles the reading parts. It gives the site a slightly terminal-adjacent feel without being obnoxious about it.
-
-The content column is 680px. There are no hero images, no decorative anything. Just text, a subtle radial gradient on the background, and some careful spacing. It's the most minimal version of this site I've built.
-
-**The TinaCMS Visual Editor**
-
-TinaCMS handles the content layer. Posts are markdown files, but the home page intro and about page are JSON singletons that get edited through TinaCMS's visual editor — meaning you can click directly on the text in a live preview and edit it in place.
-
-Getting that working took a couple of tries. The sticking point was figuring out the right integration setup. Turns out there's an official `@tinacms/astro` plugin that does a lot of the heavy lifting I was trying to wire up manually. Once I switched to that, things clicked. The pattern I ended up with has the home and about pages render a React island (`client:load`) that handles the TinaCMS real-time editing context, with a try/catch fallback to the local JSON files when the TinaCMS server isn't running — so the static build always has something to work from.
-
-**The Config Fumbling**
-
-Here's the embarrassing part: I lost real time to my own v3 config. When I started the rebuild, I kept accidentally pulling in old settings — wrong field names in the schema, stale wrangler config, TinaCMS branch settings pointing nowhere useful. The stack being the same in both versions meant there was no obvious breakage, just subtle wrong behavior that took a while to diagnose each time. Nothing glamorous to report there. Just a reminder to actually start fresh instead of copy-pasting from the old project.
-
-**Moving the LiveJournal Posts**
-
-The site hosts a bunch of old posts going back to my LiveJournal days. Getting those in was probably the most tedious part of the whole thing. I copied them over manually — every post, one by one — into a single document. Once I had them all collected, I handed that to Claude and had it split them into individual markdown files and apply the right frontmatter schema (title, date, tags, excerpt, etc.).
-
-That part went surprisingly smoothly. The frontmatter structure is simple enough that Claude could infer it from the first few posts and apply it consistently across the rest. It saved what would have been a very dull afternoon.
-
-**Where It Landed**
-
-V4 is the version I actually want to keep. It doesn't feel like it's performing anything. The Catppuccin palette is something I live in every day anyway, so it feels natural rather than chosen. The posts load fast, the editor works well, and there's nothing on the page I'd want to remove.
-
-Whether I'll be saying the same thing in a year and a half when I'm starting v5, who knows.
-
-***
-
-That's a rough draft — probably 650 words. A few things I can tune: the length, how much technical detail goes into the TinaCMS section, whether to keep or cut the "embarrassing" framing around the config fumbling. What feels off to you?Good context, that's enough to work with. Here's a draft:
-
-***
-
-**Rebuilding Long Lost Forgotten (v4)**
-
-*or: how I stopped trying to be cool and just made a site I like*
-
-***
+## or how I stopped trying to be cool and just made a site I like
 
 This is the fourth version of [longlostforgotten.com](https://longlostforgotten.com). That number feels more embarrassing than it probably should, but here we are.
 
