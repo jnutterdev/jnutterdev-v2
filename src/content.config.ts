@@ -14,6 +14,8 @@ const projects = defineCollection({
     thumbnail: z.string().optional(),
     order: z.number().default(99),
     featured: z.boolean().default(false),
+    blueskyUrl: z.string().url().optional(),
+    mastodonUrl: z.string().url().optional(),
   }),
 });
 
