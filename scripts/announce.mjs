@@ -13,10 +13,12 @@ const BLUESKY_HANDLE = process.env.BLUESKY_HANDLE;
 const BLUESKY_APP_PASSWORD = process.env.BLUESKY_APP_PASSWORD;
 const MASTODON_INSTANCE = process.env.MASTODON_INSTANCE;
 const MASTODON_ACCESS_TOKEN = process.env.MASTODON_ACCESS_TOKEN;
+const TRIGGER_SHA = process.env.TRIGGER_SHA;
 
 function getNewFiles(dir) {
+  const range = TRIGGER_SHA ? `${TRIGGER_SHA}^ ${TRIGGER_SHA}` : "HEAD~1 HEAD";
   const output = execSync(
-    `git diff --name-only --diff-filter=A HEAD~1 HEAD -- ${dir}`,
+    `git diff --name-only --diff-filter=A ${range} -- ${dir}`,
     { encoding: "utf8" }
   );
   return output

@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -30,6 +30,7 @@ jobs:
         run: node scripts/announce.mjs
         env:
           SITE_URL: https://jnutter.dev
+          TRIGGER_SHA: ${{ github.event.workflow_run.head_sha }}
           BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
           MASTODON_INSTANCE: ${{ secrets.MASTODON_INSTANCE }}
