@@ -15,16 +15,46 @@ const MASTODON_INSTANCE = process.env.MASTODON_INSTANCE;
 const MASTODON_ACCESS_TOKEN = process.env.MASTODON_ACCESS_TOKEN;
 const TRIGGER_SHA = process.env.TRIGGER_SHA;
 
+function getRefs() {
+  return TRIGGER_SHA
+    ? { oldRef: `${TRIGGER_SHA}^`, newRef: TRIGGER_SHA }
+    : { oldRef: "HEAD~1", newRef: "HEAD" };
+}
+
 function getNewFiles(dir) {
-  const range = TRIGGER_SHA ? `${TRIGGER_SHA}^ ${TRIGGER_SHA}` : "HEAD~1 HEAD";
+  const { oldRef, newRef } = getRefs();
   const output = execSync(
-    `git diff --name-only --diff-filter=A ${range} -- ${dir}`,
+    `git diff --name-only --diff-filter=A ${oldRef} ${newRef} -- ${dir}`,
     { encoding: "utf8" }
   );
   return output
     .trim()
     .split("\n")
     .filter((f) => f.endsWith(".mdx"));
+}
+
+function getJustPublishedFiles(dir) {
+  const { oldRef, newRef } = getRefs();
+  const output = execSync(
+    `git diff --name-only --diff-filter=M ${oldRef} ${newRef} -- ${dir}`,
+    { encoding: "utf8" }
+  );
+  const modifiedFiles = output
+    .trim()
+    .split("\n")
+    .filter((f) => f.endsWith(".mdx"));
+
+  return modifiedFiles.filter((filePath) => {
+    try {
+      const oldContent = execSync(`git show ${oldRef}:${filePath}`, { encoding: "utf8" });
+      const newContent = execSync(`git show ${newRef}:${filePath}`, { encoding: "utf8" });
+      const oldFm = parseFrontmatter(oldContent);
+      const newFm = parseFrontmatter(newContent);
+      return oldFm.draft === "true" && newFm.draft !== "true";
+    } catch {
+      return false;
+    }
+  });
 }
 
 function parseFrontmatter(content) {
@@ -198,7 +228,7 @@ async function postToMastodon(text, image) {
 async function main() {
   const allNewFiles = CONTENT_TYPES.flatMap(
     ({ dir, urlPath, excerptField, imageField }) =>
-      getNewFiles(dir).map((filePath) => ({
+      [...getNewFiles(dir), ...getJustPublishedFiles(dir)].map((filePath) => ({
         filePath,
         urlPath,
         excerptField,
