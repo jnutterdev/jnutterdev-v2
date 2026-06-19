@@ -132,7 +132,8 @@ async function postToBluesky(text, linkUrl, image) {
     createdAt: new Date().toISOString(),
   };
 
-  const BLUESKY_MAX_IMAGE_BYTES = 2_000_000;
+  const BLUESKY_MAX_IMAGE_BYTES = 1_000_000;
+  let thumb = null;
   if (image && image.buffer.byteLength <= BLUESKY_MAX_IMAGE_BYTES) {
     const blobRes = await fetch(
       "https://bsky.social/xrpc/com.atproto.repo.uploadBlob",
@@ -147,20 +148,27 @@ async function postToBluesky(text, linkUrl, image) {
     );
     if (blobRes.ok) {
       const { blob } = await blobRes.json();
-      record.embed = {
-        $type: "app.bsky.embed.images",
-        images: [{ image: blob, alt: text.split("\n")[0] }],
-      };
+      thumb = blob;
     } else {
       console.warn("Bluesky image upload failed, posting without image.");
     }
   } else if (image) {
     console.warn(
-      `Image too large for Bluesky (${(
+      `Image too large for Bluesky thumb (${(
         image.buffer.byteLength / 1_000_000
-      ).toFixed(1)}MB, max 2MB), posting without image.`
+      ).toFixed(1)}MB, max 1MB), posting without image.`
     );
   }
+
+  record.embed = {
+    $type: "app.bsky.embed.external",
+    external: {
+      uri: linkUrl,
+      title: text.split("\n")[0],
+      description: text.split("\n\n")[1] || "",
+      ...(thumb ? { thumb } : {}),
+    },
+  };
 
   const postRes = await fetch(
     "https://bsky.social/xrpc/com.atproto.repo.createRecord",
@@ -259,10 +267,9 @@ async function main() {
     const postUrl = `${SITE_URL}/${urlPath}/${slug}`;
     const text = `${fm.title}\n\n${fm[excerptField]}\n\n${postUrl}`;
 
-    const imageKey = fm[imageField];
-    const image = imageKey ? await fetchImage(`${SITE_URL}${imageKey}`) : null;
-    if (imageKey && !image)
-      console.warn("Could not fetch post image, posting without it.");
+    const imageUrl = `${SITE_URL}${fm[imageField] ?? "/images/default_jndev_cover.png"}`;
+    const image = await fetchImage(imageUrl);
+    if (!image) console.warn("Could not fetch post image, posting without it.");
 
     console.log(`Announcing: ${fm.title}`);
     let blueskyUrl = null;
