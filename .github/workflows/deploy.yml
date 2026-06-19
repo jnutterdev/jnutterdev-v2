@@ -13,9 +13,22 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-          cache: 'npm'
+
+      - uses: actions/cache@v4
+        id: node-modules-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
 
       - run: npm ci
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+
+      - uses: actions/cache@v4
+        with:
+          path: .astro
+          key: ${{ runner.os }}-astro-${{ hashFiles('src/**', 'tina/**', 'astro.config.*') }}
+          restore-keys: |
+            ${{ runner.os }}-astro-
 
       - name: Build
         run: npm run tina:build
