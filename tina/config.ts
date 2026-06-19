@@ -115,6 +115,16 @@ export default defineConfig({
         label: 'Projects',
         path: 'src/content/projects',
         format: 'mdx',
+        ui: {
+          filename: {
+            slugify: (values) =>
+              (values?.title ?? '')
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, ''),
+          },
+        },
         fields: [
           { type: 'string', name: 'title', label: 'Title', required: true },
           {
@@ -150,6 +160,16 @@ export default defineConfig({
         label: 'Blog Posts',
         path: 'src/content/blog',
         format: 'mdx',
+        ui: {
+          filename: {
+            slugify: (values) =>
+              (values?.title ?? '')
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)/g, ''),
+          },
+        },
         fields: [
           { type: 'string', name: 'title', label: 'Title', required: true },
           { type: 'datetime', name: 'date', label: 'Publish Date', required: true },
