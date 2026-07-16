@@ -1,0 +1,23 @@
+---
+title: Wiring Bluesky comments into a static blog with AT Protocol
+date: 2026-07-16T23:37:56.904Z
+excerpt: 'I''ve had an announce script running for a while now — new posts on longlostforgotten.com get auto-posted to Bluesky and Mastodon, and the resulting share links get written back into the post''s frontmatter. It''s been sitting there doing its one job for months. This week I finally used that data for something: threading real Bluesky replies back onto the blog post as a comments section.'
+---
+
+I've had an announce script running for a while now — new posts on longlostforgotten.com get auto-posted to Bluesky and Mastodon, and the resulting share links get written back into the post's frontmatter. It's been sitting there doing its one job for months. This week I finally used that data for something: threading real Bluesky replies back onto the blog post as a comments section.
+
+\*\*The idea:\*\* no comment box, no database, no new auth system — just read the reply thread from the Bluesky post I already made, and render it under the article.
+
+\*\*How it actually works:\*\*
+
+1\. The announce script already saves a \`blueskyUrl\` like \`https\://bsky.app/profile/longlostforgotten.com/post/3mojeo6r6ht2t\` into the post's frontmatter. The last part of that URL — \`3mojeo6r6ht2t\` — is the post's "rkey."
+
+2\. AT Protocol doesn't address posts by that URL, though — it wants an AT-URI: \`at://{did}/app.bsky.feed.post/{rkey}\`. The \`did\` is a permanent, resolvable ID for a Bluesky account, and it doesn't change, so I resolved mine once (\`com.atproto.identity.resolveHandle\`) and just hardcoded it rather than re-resolving it on every page load.
+
+3\. With the AT-URI built, I call \`app.bsky.feed.getPostThread\` — the neat part being this is a fully public, unauthenticated, CORS-open endpoint. No API key, no login, no server-side proxy required. Any browser can just fetch it directly.
+
+4\. Because the site is a static Astro build, the page HTML can't reflect replies that show up after deploy. So the fetch happens client-side in a small vanilla JS \`\<script>\` — the component ships a "Loading replies…" placeholder that gets swapped for the real thread (or a "no replies yet" state) the moment the browser fetches it.
+
+\*\*The one gotcha that actually bit me:\*\* Astro's scoped \`\<style>\` blocks work by tagging every element in your template with a hidden \`data-astro-cid-\*\` attribute at build time, and scoping the CSS rules to that attribute. That works fine for anything in the template — but the comment nodes here are built at runtime with \`document.createElement\`, so they never get that attribute, and the scoped styles silently never matched. Everything rendered in raw, unstyled browser defaults (giant avatar images, no spacing) until I caught it and marked that component's styles \`is\:global\` instead.
+
+End result: real Bluesky replies showing up as comments on a fully static site, with zero backend and zero write access to anyone's account. The natural next step — letting people comment \*from\* the blog itself — would mean building actual "Sign in with Bluesky" (atproto OAuth), which is a real chunk of work I'm holding off on for now.
