@@ -74,6 +74,30 @@ function parseFrontmatter(content) {
   return result;
 }
 
+// Bluesky's hard limit is 300 graphemes; stay a few under as a safety
+// margin since this is a code-point approximation, not true grapheme counting.
+const BLUESKY_MAX_GRAPHEMES = 295;
+
+function graphemeLength(str) {
+  return Array.from(str).length;
+}
+
+function buildBlueskyText(title, excerpt, postUrl) {
+  const separator = "\n\n";
+  const fixedLength =
+    graphemeLength(title) + separator.length * 2 + graphemeLength(postUrl);
+  const budget = BLUESKY_MAX_GRAPHEMES - fixedLength;
+
+  let trimmedExcerpt = excerpt;
+  if (graphemeLength(excerpt) > budget) {
+    const ellipsis = "…";
+    const keep = Math.max(0, budget - graphemeLength(ellipsis));
+    trimmedExcerpt = Array.from(excerpt).slice(0, keep).join("") + ellipsis;
+  }
+
+  return `${title}${separator}${trimmedExcerpt}${separator}${postUrl}`;
+}
+
 function updateFrontmatterField(filePath, key, value) {
   let content = readFileSync(filePath, "utf8");
   const closingIdx = content.indexOf("\n---", 4);
@@ -266,6 +290,7 @@ async function main() {
     const slug = filePath.replace(dir, "").replace(".mdx", "").toLowerCase();
     const postUrl = `${SITE_URL}/${urlPath}/${slug}`;
     const text = `${fm.title}\n\n${fm[excerptField]}\n\n${postUrl}`;
+    const blueskyText = buildBlueskyText(fm.title, fm[excerptField], postUrl);
 
     const imageUrl = `${SITE_URL}${fm[imageField] ?? "/images/default_jndev_cover.png"}`;
     const image = await fetchImage(imageUrl);
@@ -275,16 +300,20 @@ async function main() {
     let blueskyUrl = null;
     let mastodonUrl = null;
 
-    if (BLUESKY_HANDLE && BLUESKY_APP_PASSWORD) {
+    if (fm.blueskyUrl) {
+      console.log(`Already posted to Bluesky, skipping: ${filePath}`);
+    } else if (BLUESKY_HANDLE && BLUESKY_APP_PASSWORD) {
       try {
-        blueskyUrl = await postToBluesky(text, postUrl, image);
+        blueskyUrl = await postToBluesky(blueskyText, postUrl, image);
         console.log(`Bluesky: ${blueskyUrl}`);
       } catch (err) {
         console.error("Bluesky error:", err.message);
       }
     }
 
-    if (MASTODON_INSTANCE && MASTODON_ACCESS_TOKEN) {
+    if (fm.mastodonUrl) {
+      console.log(`Already posted to Mastodon, skipping: ${filePath}`);
+    } else if (MASTODON_INSTANCE && MASTODON_ACCESS_TOKEN) {
       try {
         mastodonUrl = await postToMastodon(text, image);
         console.log(`Mastodon: ${mastodonUrl}`);
