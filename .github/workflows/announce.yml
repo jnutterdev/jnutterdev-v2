@@ -5,14 +5,21 @@ on:
     workflows: [Deploy]
     types: [completed]
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      trigger_sha:
+        description: 'Commit SHA to diff against its parent for new/published posts'
+        required: true
 
 jobs:
   announce:
     runs-on: ubuntu-latest
     # only run after a successful deploy, and not when the bot commits discussionUrl back
     if: |
-      github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.actor.login != 'github-actions[bot]'
+      github.event_name == 'workflow_dispatch' || (
+        github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.actor.login != 'github-actions[bot]'
+      )
     permissions:
       contents: write
     steps:
@@ -30,7 +37,7 @@ jobs:
         run: node scripts/announce.mjs
         env:
           SITE_URL: https://jnutter.dev
-          TRIGGER_SHA: ${{ github.event.workflow_run.head_sha }}
+          TRIGGER_SHA: ${{ github.event.inputs.trigger_sha || github.event.workflow_run.head_sha }}
           BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
           MASTODON_INSTANCE: ${{ secrets.MASTODON_INSTANCE }}
