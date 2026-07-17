@@ -22,6 +22,7 @@ jobs:
       )
     permissions:
       contents: write
+      actions: write
     steps:
       - uses: actions/checkout@v7
         with:
@@ -34,6 +35,7 @@ jobs:
           node-version: lts/*
 
       - name: Post to Bluesky / Mastodon
+        id: announce
         run: node scripts/announce.mjs
         env:
           SITE_URL: https://jnutter.dev
@@ -42,3 +44,12 @@ jobs:
           BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
           MASTODON_INSTANCE: ${{ secrets.MASTODON_INSTANCE }}
           MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+
+      # The commit above used GITHUB_TOKEN, which doesn't trigger Deploy's
+      # `on: push`, so the live site would otherwise never pick up the
+      # discussion URLs written back to frontmatter.
+      - name: Trigger Deploy
+        if: steps.announce.outputs.pushed == 'true'
+        run: gh workflow run deploy.yml --ref main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

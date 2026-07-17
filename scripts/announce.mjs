@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, appendFileSync } from "fs";
 import { execSync } from "child_process";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
@@ -333,12 +333,21 @@ async function main() {
   );
   const contentDirs = CONTENT_TYPES.map((c) => c.dir).join(" ");
   execSync(`git add ${contentDirs}`);
+  let pushed = false;
   try {
     execSync("git diff --staged --quiet");
     console.log("Nothing to commit.");
   } catch {
     execSync('git commit -m "chore: add discussion URLs"');
     execSync("git push");
+    pushed = true;
+  }
+
+  // This push uses GITHUB_TOKEN, which GitHub deliberately excludes from
+  // triggering other workflows (anti-recursion), so Deploy never sees it.
+  // The caller uses this output to explicitly dispatch Deploy instead.
+  if (process.env.GITHUB_OUTPUT) {
+    appendFileSync(process.env.GITHUB_OUTPUT, `pushed=${pushed}\n`);
   }
 }
 
