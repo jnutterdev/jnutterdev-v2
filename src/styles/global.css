@@ -1068,6 +1068,108 @@ img {
   flex-shrink: 0;
 }
 
+.bluesky-comments {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.bluesky-comments__label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+
+.bluesky-comments__status {
+  font-size: 0.85rem;
+  color: var(--text-mid);
+}
+
+.bluesky-comments ul.bluesky-comment-thread,
+.bluesky-comments ul.bluesky-comment__replies {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bluesky-comments ul.bluesky-comment__replies {
+  margin-top: 16px;
+  padding-left: 24px;
+  border-left: 1px solid var(--border);
+}
+
+.bluesky-comment__link {
+  display: flex;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.bluesky-comment__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.bluesky-comment__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.bluesky-comment__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.bluesky-comment__author {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.bluesky-comment__date {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-faint);
+  letter-spacing: 0.03em;
+}
+
+.bluesky-comment__date::before {
+  content: '·';
+  margin-right: 8px;
+  color: var(--text-faint);
+}
+
+.bluesky-comment__text {
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.bluesky-comment__likes {
+  display: inline-block;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-faint);
+}
+
+.bluesky-comment__link:hover .bluesky-comment__author {
+  color: var(--tn-blue);
+}
+
 /* ============================================================
    CTA STRIP
 ============================================================ */

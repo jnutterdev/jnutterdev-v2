@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlueskyComments from '../../components/BlueskyComments.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -54,6 +55,8 @@ function fmtDate(d: Date) {
             </div>
           </div>
         )}
+
+        {post.data.blueskyUrl && <BlueskyComments blueskyUrl={post.data.blueskyUrl} />}
       </article>
 
       <aside class="writing-aside">
