@@ -177,6 +177,8 @@ export default defineConfig({
             type: 'string',
             name: 'excerpt',
             label: 'Excerpt',
+            description:
+              'Also used as the Bluesky auto-post text alongside the title and URL, which together must fit Bluesky\'s 300 character limit. Keep this to roughly 250 characters or less — longer excerpts get automatically truncated with an ellipsis.',
             required: true,
             ui: { component: 'textarea' },
           },
