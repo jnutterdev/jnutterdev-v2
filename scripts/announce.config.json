@@ -4,7 +4,8 @@
       "dir": "src/content/blog/",
       "urlPath": "blog",
       "excerptField": "excerpt",
-      "imageField": "cover_image"
+      "imageField": "cover_image",
+      "generatedImagePath": "/images/og/{slug}.png"
     },
     {
       "dir": "src/content/projects/",

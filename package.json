@@ -5,10 +5,11 @@
   "scripts": {
     "prepare": "cp scripts/hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push",
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/generate-og-cards.mjs && astro build",
     "preview": "astro preview",
     "tina:dev": "tinacms dev -c \"astro dev\"",
-    "tina:build": "tinacms build && astro build"
+    "tina:build": "tinacms build && node scripts/generate-og-cards.mjs && astro build",
+    "og:build": "node scripts/generate-og-cards.mjs"
   },
   "engines": {
     "node": ">=24.0.0",
@@ -16,9 +17,11 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.6",
+    "@resvg/resvg-js": "^2.6.2",
     "@tinacms/cli": "latest",
     "astro": "^6.3.8",
     "normalize.css": "^8.0.1",
+    "satori": "^0.28.0",
     "tinacms": "latest"
   }
 }

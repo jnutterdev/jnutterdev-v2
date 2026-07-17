@@ -44,6 +44,9 @@ pnpm-debug.log*
 # Tina CMS
 tina/__generated__/
 
+# Generated social card images (built fresh on each build)
+public/images/og/
+
 # Misc
 *.tgz
 .cache/
