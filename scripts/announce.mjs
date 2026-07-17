@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync, appendFileSync } from "fs";
 import { execSync } from "child_process";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+import { parseFrontmatter } from "./lib/frontmatter.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const { contentTypes: CONTENT_TYPES } = JSON.parse(
@@ -55,32 +56,6 @@ function getJustPublishedFiles(dir) {
       return false;
     }
   });
-}
-
-function parseFrontmatterValue(raw) {
-  const value = raw.trim();
-  if (value.startsWith("'") && value.endsWith("'") && value.length > 1) {
-    // YAML single-quoted scalars escape an embedded ' as ''
-    return value.slice(1, -1).replace(/''/g, "'");
-  }
-  if (value.startsWith('"') && value.endsWith('"') && value.length > 1) {
-    return value.slice(1, -1).replace(/\\"/g, '"');
-  }
-  return value;
-}
-
-function parseFrontmatter(content) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) return {};
-  const result = {};
-  for (const line of match[1].split("\n")) {
-    const colonIdx = line.indexOf(":");
-    if (colonIdx === -1) continue;
-    const key = line.slice(0, colonIdx).trim();
-    const value = parseFrontmatterValue(line.slice(colonIdx + 1));
-    if (key) result[key] = value;
-  }
-  return result;
 }
 
 // Bluesky's hard limit is 300 graphemes; stay a few under as a safety
@@ -268,12 +243,13 @@ async function postToMastodon(text, image) {
 
 async function main() {
   const allNewFiles = CONTENT_TYPES.flatMap(
-    ({ dir, urlPath, excerptField, imageField }) =>
+    ({ dir, urlPath, excerptField, imageField, generatedImagePath }) =>
       [...getNewFiles(dir), ...getJustPublishedFiles(dir)].map((filePath) => ({
         filePath,
         urlPath,
         excerptField,
         imageField,
+        generatedImagePath,
         dir,
       }))
   );
@@ -288,6 +264,7 @@ async function main() {
     urlPath,
     excerptField,
     imageField,
+    generatedImagePath,
     dir,
   } of allNewFiles) {
     const fm = parseFrontmatter(readFileSync(filePath, "utf8"));
@@ -301,7 +278,10 @@ async function main() {
     const text = `${fm.title}\n\n${fm[excerptField]}\n\n${postUrl}`;
     const blueskyText = buildBlueskyText(fm.title, fm[excerptField], postUrl);
 
-    const imageUrl = `${SITE_URL}${fm[imageField] ?? "/images/default_jndev_cover.png"}`;
+    const fallbackImage = generatedImagePath
+      ? generatedImagePath.replace("{slug}", slug)
+      : "/images/default_jndev_cover.png";
+    const imageUrl = `${SITE_URL}${fm[imageField] ?? fallbackImage}`;
     const image = await fetchImage(imageUrl);
     if (!image) console.warn("Could not fetch post image, posting without it.");
 
