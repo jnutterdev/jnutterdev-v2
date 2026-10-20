@@ -1,6 +1,6 @@
 ---
 title: jnutter.dev v2
-description: "The redesigned portfolio — Astro for full static output, Tina CMS for git-backed editorial control, deployed via GitHub Actions to Cloudflare Pages. JS only where needed."
+description: 'The redesigned portfolio: Astro for full static output, Tina CMS for git-backed editorial control, deployed via GitHub Actions to Cloudflare Pages. JS only where needed.'
 draft: false
 tech:
   - Astro
@@ -8,8 +8,8 @@ tech:
   - CSS
   - CI/CD
 status: active
-github_url: "https://github.com/jnutterdev/jnutterdev-v2"
-live_url: "https://jnutter.dev"
+github_url: 'https://github.com/jnutterdev/jnutterdev-v2'
+live_url: 'https://jnutter.dev'
 thumbnail: /images/cover-1781542396048.png
 order: 8
 featured: true
@@ -17,17 +17,17 @@ featured: true
 
 ## Overview
 
-Full rebuild of my personal portfolio using Astro's static output mode and Tina CMS for visual editing. The goal was a zero-client-JS experience with a solid content editing workflow that doesn't require touching code for routine updates.
+A full rebuild of my personal portfolio using Astro's static output mode and Tina CMS for the content management. The goal was a zero-client-JS experience with a solid content editing workflow that doesn't require touching code for routine updates.
 
 ## Design
 
-Built around a dark, typographically intentional design system — near-black background, high-contrast foreground, with accent colors used sparingly. Type is set in Calibri with monospace details for metadata and UI elements. The sidebar card layout on the homepage keeps key info scannable without cluttering the hero.
+Built around a dark, typographically intentional design system, near-black background, high-contrast foreground, with accent colors used sparingly…ok, so it's basically Tokyo Night. Type is set in Calibri with monospace details for metadata and UI elements. The sidebar card layout on the homepage keeps key info scannable without cluttering the hero.
 
 ## Stack decisions
 
-**Astro** handles all page rendering at build time — no JS shipped to the client unless explicitly needed. Content collections provide typed, schema-validated MDX files for both projects and blog posts.
+**Astro** handles all page rendering at build time, no JS shipped to the client unless explicitly needed. Content collections provide typed, schema-validated MDX files for both projects and blog posts.
 
-**Tina CMS** sits on top of the content layer. It reads and writes the same MDX files directly via the GitHub API, so every edit in the visual editor produces a real git commit — keeping content versioned and fully recoverable.
+**Tina CMS** sits on top of the content layer. It reads and writes the same MDX files directly via the GitHub API, so every edit in the visual editor produces a real git commit, keeping content versioned and fully recoverable.
 
 **Plain CSS** with custom properties matches the design tokens exactly. No build step needed, no class-name collisions.
 
@@ -37,4 +37,4 @@ Push to `main` → GitHub Actions builds (`npm run build`) → deploys to Cloudf
 
 ## Learnings
 
-The Tina + Astro pairing is unusually clean. Most CMS integrations require a database or API at runtime; this one is entirely build-time. The only runtime requirement is the Tina Cloud auth layer for the editor itself.
+The Tina + Astro pairing is clean and feels comfortable to me. Most CMS integrations require a database or API at runtime; this one is entirely build-time. The only runtime requirement is the Tina Cloud auth layer for the editor itself.
