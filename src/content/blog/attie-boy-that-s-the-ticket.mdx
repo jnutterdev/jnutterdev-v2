@@ -1,0 +1,48 @@
+---
+title: Attie boy that's the ticket
+date: 2026-10-27T03:35:45.538Z
+excerpt: 'Awhile back, I was given access to attie, which is Bluesky''s AI tool they created to help curate custom feeds and what not based on prompts you enter. I haven''t really touched it since then, but decided to give it another try the other day.'
+tags:
+  - bluesky
+  - building
+  - attie
+---
+
+Awhile back, I was given access to attie, which is Bluesky's AI tool they created to help curate custom feeds and what not based on prompts you enter. I haven't really touched it since then, but decided to give it another try the other day. I learned that they've since expanded the tool so that it can do more things, such as build hosted web apps, socially. I know a lot of folks have big emotions on AI, and I do get it. But those feelings aside, this is pretty neat I must say. I spent maybe 30 minutes building out an [fm synthesis groove machine](https://blooming-plucky-eclair.attie.site) type thing. I had gotten the idea as someone else created a drum machine. It's pretty cool. You can create up to 4 pages of 4 beat patterns, and play up to 4 instruments at a time. There's a drop down menu with a few common fm instruments from synths to bells, etc. I added a randomizer with a key menu, so you can randomize patterns in a certain key if you want. You can save and edit patterns, and even export them to midi. There's so much more I can add to it, and all I need to do is type out a prompt. 
+
+I tried to ask Attie what tech stack was used to create the app, but it doesn't have any awareness of it and isn't able to compile and export the underlying code. This is all it could tell me:
+
+
+> It's a browser-based app doing real-time audio synthesis in-browser (the FM voices, envelopes, vibrato, filtering) — almost certainly via the Web Audio API, since everything plays instantly with no server round-trip for sound.
+
+> Saved patterns are backed by a storage/account system tied to your Attie sign-in (list/save/rename/delete), which the recent bug fix referenced as having its own typed endpoint definitions and server-side validation.
+
+> MIDI export is generated client-side as a standard Format 1 .mid file.
+>
+
+Looking at the source code of the site, I did a bit more digging and found the following:
+
+> Frontend\
+> \
+> React 19.2.4 + ReactDOM, bundled
+
+> TypeScript
+
+> Tailwind CSS v4.3.3
+
+> Bundled with esbuild
+
+>
+
+> The synth
+
+> Hand-rolled Web Audio API, no third-party libraries like Tone.js. 
+
+>
+
+> Saving and identity (the Attie-specific part): various AT Protocol libraries
+
+Pretty interesting, honestly. Building something like this on my own probably would have taken at least a week or two, and I'm still trying to learn AT Protocol…so maybe longer? 
+
+All in all, still a pretty fun little tool and it has some endless possibilities for sure. I'm going to spend some more time with AT Protocol to get my head around it, and also see if there's anything else I can build. Gotta keep myself busy!
+&#x20;
