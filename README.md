@@ -21,20 +21,20 @@ The design uses a signage-inspired editorial aesthetic with the Tokyo Night colo
 ### Prerequisites
 
 - Node.js 24.16.0 (LTS)
-- npm 11
+- pnpm 10
 
 ### Install
 
 ```bash
 git clone https://github.com/jnutterdev/jnutterdev.com.git
 cd jnutterdev.com
-npm install
+pnpm install
 ```
 
 ### Run locally
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 The site runs at `http://localhost:4321`.
@@ -42,7 +42,7 @@ The site runs at `http://localhost:4321`.
 ### Run locally with Tina CMS editor
 
 ```bash
-npm run tina:dev
+pnpm run tina:dev
 ```
 
 The site runs at `http://localhost:4321` and the Tina editor is available at `http://localhost:4321/admin`. Requires `TINA_CLIENT_ID` and `TINA_TOKEN` in a `.env` file.
@@ -50,7 +50,7 @@ The site runs at `http://localhost:4321` and the Tina editor is available at `ht
 ### Build
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 Output is generated in `dist/`.
@@ -115,11 +115,11 @@ Content is managed via [Tina CMS](https://tina.io) and stored as Markdown/MDX fi
 
 Page content includes hero copy, bio text, skills lists, social links, stats, and the CTA strip — all editable as singleton documents in Tina without touching any `.astro` files.
 
-To edit content locally, run `npm run tina:dev` and navigate to `/admin`.
+To edit content locally, run `pnpm run tina:dev` and navigate to `/admin`.
 
 ### Editing via Tina Cloud
 
-Content can also be edited directly through the Tina Cloud editor without a local dev environment. Because these edits commit and push to `main` on the server, always run `git pull` before pushing local changes to avoid conflicts. A `pre-push` git hook (installed automatically via `npm install`) will block the push and warn you if the remote is ahead.
+Content can also be edited directly through the Tina Cloud editor without a local dev environment. Because these edits commit and push to `main` on the server, always run `git pull` before pushing local changes to avoid conflicts. A `pre-push` git hook (installed automatically via `pnpm install`) will block the push and warn you if the remote is ahead.
 
 ---
 
@@ -132,8 +132,8 @@ The `wrangler.toml` sets `not_found_handling = "404-page"` so the custom `404.ht
 ### Pipeline steps
 
 1. Checkout repo
-2. Install dependencies (`npm ci`)
-3. Build site (`npm run tina:build`)
+2. Install dependencies (`pnpm install --frozen-lockfile`)
+3. Build site (`pnpm run tina:build`)
 4. Deploy `dist/` to Cloudflare Workers (`wrangler deploy`)
 
 ### Required GitHub secrets
